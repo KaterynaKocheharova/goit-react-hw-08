@@ -1,0 +1,9 @@
+.home-section {
+  padding-top: 15%;
+}
+
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
