@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
+import { deleteContact } from "../../redux/contacts/operations";
 import { CiUser } from "react-icons/ci";
 import { CiPhone } from "react-icons/ci";
 import css from "./Contact.module.css";
