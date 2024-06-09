@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { fetchContacts } from "./redux/contacts/operations";
 import Layout from "./components/Layout";
+import PrivateRoute from "./PrivateRoute";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
@@ -23,7 +24,12 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute component={<ContactsPage />} redirect="/login" />
+          }
+        />
       </Routes>
     </Layout>
   );
