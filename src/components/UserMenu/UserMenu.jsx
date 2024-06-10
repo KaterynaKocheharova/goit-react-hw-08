@@ -1,8 +1,16 @@
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/operations";
+
 const UserMenu = () => {
+  const dispatch = useDispatch();
+  const handleLogoutClick = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <p>Welcome!</p>
-      <button>Logout</button>
+      <button onClick={handleLogoutClick}>Logout</button>
     </>
   );
 };

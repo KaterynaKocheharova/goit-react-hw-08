@@ -23,9 +23,9 @@ const BaseForm = ({ children, onSubmit }) => {
   return (
     <Formik
       initialValues={{
+        name: "",
         email: "",
         password: "",
-        name: "",
       }}
       validationSchema={ValidationSchema}
       onSubmit={onSubmit}
