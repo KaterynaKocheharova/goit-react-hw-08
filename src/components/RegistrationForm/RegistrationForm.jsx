@@ -6,7 +6,6 @@ import FormButton from "../FormButton/FormButton";
 const RegistrationForm = () => {
   const dispatch = useDispatch();
   const onSubmit = (values) => {
-    console.log(values);
     dispatch(register(values));
   };
 
