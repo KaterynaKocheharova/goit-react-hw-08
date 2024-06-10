@@ -1,7 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import css from "./Form.module.css";
 
 const ValidationSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .required("Required")
@@ -15,23 +17,39 @@ const ValidationSchema = Yup.object().shape({
     ),
 });
 
-const BaseForm = ({ children }) => {
+// maybe add labels instead of placeholders
+
+const BaseForm = ({ children, onSubmit }) => {
   return (
     <Formik
       initialValues={{
         email: "",
         password: "",
+        name: "",
       }}
       validationSchema={ValidationSchema}
-      onSubmit={(values) => {
-        console.log(values);
-      }}
+      onSubmit={onSubmit}
     >
-      <Form>
-        <Field name="email" type="email" />
-        <ErrorMessage name="email" />
-        <Field name="password" type="password" />
-        <ErrorMessage name="password" />
+      <Form className={css.form}>
+        <div>
+          <label htmlFor="name">Your name</label>
+          <Field name="name" type="text" placeholder="Kateryna" />
+          <ErrorMessage name="name" />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <Field
+            name="email"
+            type="email"
+            placeholder="katerynakocheharova@meta.ua"
+          />
+          <ErrorMessage name="email" />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <Field name="password" type="password" placeholder="your password" />
+          <ErrorMessage name="password" />
+        </div>
         {children}
       </Form>
     </Formik>

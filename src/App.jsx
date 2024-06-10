@@ -11,6 +11,7 @@ const RegistrationPage = lazy(() =>
 );
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+// add not found page
 
 export default function App() {
   const dispatch = useDispatch();
