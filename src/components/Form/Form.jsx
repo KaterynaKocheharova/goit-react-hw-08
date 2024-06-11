@@ -17,7 +17,7 @@ const ValidationSchema = Yup.object().shape({
     ),
 });
 
-const BaseForm = ({ children, onSubmit, isLoginForm = false }) => {
+const BaseForm = ({ children, onSubmit, isRegisterForm = false }) => {
   return (
     <Formik
       initialValues={{
@@ -29,7 +29,7 @@ const BaseForm = ({ children, onSubmit, isLoginForm = false }) => {
       onSubmit={onSubmit}
     >
       <Form className={css.form}>
-        {isLoginForm && (
+        {isRegisterForm && (
           <div>
             <label htmlFor="name">Your name</label>
             <Field name="name" type="text" />

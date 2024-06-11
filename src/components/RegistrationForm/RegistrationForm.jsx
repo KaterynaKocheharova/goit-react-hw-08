@@ -14,7 +14,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <BaseForm onSubmit={onSubmit}>
+    <BaseForm onSubmit={onSubmit} isRegisterFomr>
       <FormButton>Register</FormButton>
     </BaseForm>
   );
