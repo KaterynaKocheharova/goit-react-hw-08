@@ -17,9 +17,7 @@ const ValidationSchema = Yup.object().shape({
     ),
 });
 
-// maybe add labels instead of placeholders
-
-const BaseForm = ({ children, onSubmit }) => {
+const BaseForm = ({ children, onSubmit, isLoginForm = false }) => {
   return (
     <Formik
       initialValues={{
@@ -31,23 +29,21 @@ const BaseForm = ({ children, onSubmit }) => {
       onSubmit={onSubmit}
     >
       <Form className={css.form}>
-        <div>
-          <label htmlFor="name">Your name</label>
-          <Field name="name" type="text" placeholder="Kateryna" />
-          <ErrorMessage name="name" />
-        </div>
+        {isLoginForm && (
+          <div>
+            <label htmlFor="name">Your name</label>
+            <Field name="name" type="text" />
+            <ErrorMessage name="name" />
+          </div>
+        )}
         <div>
           <label htmlFor="email">Email</label>
-          <Field
-            name="email"
-            type="email"
-            placeholder="katerynakocheharova@meta.ua"
-          />
+          <Field name="email" type="email" />
           <ErrorMessage name="email" />
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <Field name="password" type="password" placeholder="your password" />
+          <Field name="password" type="password" />
           <ErrorMessage name="password" />
         </div>
         {children}

@@ -13,7 +13,7 @@ const LoginForm = () => {
     navigate("/contacts");
   };
   return (
-    <BaseForm onSubmit={onSubmit}>
+    <BaseForm onSubmit={onSubmit} isLoginForm>
       <FormButton>Log in</FormButton>
     </BaseForm>
   );
