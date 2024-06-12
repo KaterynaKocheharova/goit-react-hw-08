@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login, logout, refreshUser } from "./operations";
+import { register, login, logOut, refreshUser } from "./operations";
 
 // error?
 
@@ -26,9 +26,9 @@ const auth = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
-      .addCase(logout.fulfilled, (state) => {
+      .addCase(logOut.fulfilled, (state) => {
         state.isLoggedIn = false;
-        state.user = null;
+        state.user = { name: null, email: null };
         state.token = null;
       })
       .addCase(refreshUser.pending, (state) => {
