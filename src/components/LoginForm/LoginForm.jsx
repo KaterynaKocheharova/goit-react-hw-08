@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { activateErrorToast } from "../../js/toast";
 import BaseForm from "../Form/Form";
 import FormButton from "../FormButton/FormButton";
 
@@ -11,10 +12,7 @@ const LoginForm = () => {
     dispatch(login(values))
       .unwrap()
       .catch((error) => {
-        toast.error(`error: ${error}`, {
-          duration: 2000,
-          position: "top-right",
-        });
+        activateErrorToast(error);
       });
   };
 
