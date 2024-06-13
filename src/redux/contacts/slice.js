@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 import { logOut } from "../auth/operations";
 
-const handlePending = (state) => {
+export const handlePending = (state) => {
   state.isLoading = true;
 };
 
-const handleError = (state, action) => {
+export const handleError = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
 };

@@ -3,7 +3,6 @@ import * as Yup from "yup";
 import css from "./Form.module.css";
 
 const loginValidationSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .required("Required")
@@ -18,6 +17,7 @@ const loginValidationSchema = Yup.object().shape({
 });
 
 const registerValidationSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .required("Required")
@@ -41,7 +41,7 @@ const registerInitialValues = {
   name: "",
 };
 
-const BaseForm = ({ children, onSubmit, isRegistrationForm = false }) => {
+const BaseForm = ({ children, onSubmit, isRegistrationForm }) => {
   const initialValues = isRegistrationForm
     ? registerInitialValues
     : loginInitialValues;

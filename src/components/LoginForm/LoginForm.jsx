@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
+import toast, { Toaster } from "react-hot-toast";
 import BaseForm from "../Form/Form";
 import FormButton from "../FormButton/FormButton";
 
@@ -7,12 +8,23 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
-    dispatch(login(values));
+    dispatch(login(values))
+      .unwrap()
+      .catch((error) => {
+        toast.error(`error: ${error}`, {
+          duration: 2000,
+          position: "top-right",
+        });
+      });
   };
+
   return (
-    <BaseForm onSubmit={onSubmit}>
-      <FormButton>Log in</FormButton>
-    </BaseForm>
+    <div>
+      <BaseForm onSubmit={onSubmit}>
+        <FormButton>Log in</FormButton>
+      </BaseForm>
+      <Toaster />
+    </div>
   );
 };
 
