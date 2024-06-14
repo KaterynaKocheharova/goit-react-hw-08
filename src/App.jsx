@@ -26,8 +26,8 @@ export default function App() {
   return isRefreshing ? (
     <p>Refreshing your info. Please, wait</p>
   ) : (
-    <Layout>
-      <Suspense fallback={null}>
+    <Suspense fallback={null}>
+      <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -56,7 +56,7 @@ export default function App() {
           />
           <Route path="/*" element={<NotFound />} />
         </Routes>
-      </Suspense>
-    </Layout>
+      </Layout>
+    </Suspense>
   );
 }
