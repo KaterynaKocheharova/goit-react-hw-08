@@ -23,9 +23,12 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
+  if (isRefreshing) {
+    return <p>Refreshing your info. Please, wait</p>;
+  }
+
   return (
     <Layout>
-      {isRefreshing && <p>Refreshing your info. Please, wait</p>}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
