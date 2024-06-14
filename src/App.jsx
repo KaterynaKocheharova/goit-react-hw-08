@@ -23,11 +23,9 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  if (isRefreshing) {
-    return <p>Refreshing your info. Please, wait</p>;
-  }
-
-  return (
+  return isRefreshing ? (
+    <p>Refreshing your info. Please, wait</p>
+  ) : (
     <Layout>
       <Suspense fallback={null}>
         <Routes>
