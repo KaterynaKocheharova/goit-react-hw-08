@@ -3,7 +3,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  margin-bottom: var(--big-mb);
   border-radius: 27px;
   background-color: var(--first-color);
   box-shadow: var(--main-box-shadow);

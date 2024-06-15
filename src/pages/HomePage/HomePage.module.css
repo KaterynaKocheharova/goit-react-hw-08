@@ -2,8 +2,11 @@
   padding-top: 15%;
 }
 
-.home-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.home-page-container {
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 29px;
+  background: var(--gradient);
 }
