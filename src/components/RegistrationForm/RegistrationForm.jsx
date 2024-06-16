@@ -15,7 +15,7 @@ const RegistrationForm = () => {
     dispatch(register(values))
       .unwrap()
       .catch((error) => {
-        activateErrorToast(error);
+        activateErrorToast(error, "register");
       });
   };
 

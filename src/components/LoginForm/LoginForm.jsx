@@ -15,7 +15,7 @@ const LoginForm = () => {
     dispatch(login(values))
       .unwrap()
       .catch((error) => {
-        activateErrorToast(error);
+        activateErrorToast(error, "login");
       });
   };
 
