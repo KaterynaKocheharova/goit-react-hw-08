@@ -23,40 +23,47 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <p>Refreshing your info. Please, wait</p>
-  ) : (
-    <Suspense fallback={null}>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/register"
-            element={
-              <RestrictedRoute
-                component={<RegistrationPage />}
-                redirectTo={"/contacts"}
+  return (
+    <div id="App">
+      {isRefreshing ? (
+        <p>Refreshing your info. Please, wait</p>
+      ) : (
+        <Suspense fallback={null}>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/register"
+                element={
+                  <RestrictedRoute
+                    component={<RegistrationPage />}
+                    redirectTo={"/contacts"}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <RestrictedRoute
-                component={<LoginPage />}
-                redirectTo={"/contacts"}
+              <Route
+                path="/login"
+                element={
+                  <RestrictedRoute
+                    component={<LoginPage />}
+                    redirectTo={"/contacts"}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
-            }
-          />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-      </Layout>
-    </Suspense>
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute
+                    component={<ContactsPage />}
+                    redirectTo="/login"
+                  />
+                }
+              />
+              <Route path="/*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </Suspense>
+      )}
+    </div>
   );
 }
