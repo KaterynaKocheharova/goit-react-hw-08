@@ -1,0 +1,23 @@
+.button {
+  align-self: center;
+  padding: 1.5rem;
+  border: 0;
+  background-color: var(--second-color);
+  border-radius: var(--main-border-radius);
+  cursor: pointer;
+  transition: background-color 250ms linear;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--first-color);
+}
+
+.auth-btn {
+  background: var(--extra-color-2);
+}
+
+.auth-btn:hover,
+.auth-btn:focus {
+  background: var(--extra-color);
+}

@@ -1,3 +1,7 @@
+.header {
+  padding-top: 1.5rem;
+}
+
 .app-bar {
   display: flex;
   justify-content: space-between;

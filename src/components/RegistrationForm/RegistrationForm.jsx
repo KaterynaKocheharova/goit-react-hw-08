@@ -4,8 +4,8 @@ import { Toaster } from "react-hot-toast";
 import { activateErrorToast } from "../../js/toast";
 import { selectIsLoading } from "../../redux/auth/selectors";
 import BaseForm from "../Form/Form";
-import FormButton from "../FormButton/FormButton";
-import AuthLoader from "../AuthLoader/AuthLoader";
+import Loader from "../Loader/Loader";
+import Button from "../common/Button/Button";
 
 const RegistrationForm = () => {
   const isLoading = useSelector(selectIsLoading);
@@ -22,10 +22,10 @@ const RegistrationForm = () => {
   return (
     <div>
       <BaseForm onSubmit={onSubmit} isRegistrationForm>
-        <FormButton>Register</FormButton>
+        <Button type="auth">Register</Button>
       </BaseForm>
       <Toaster />
-      {isLoading && <AuthLoader />}
+      {isLoading && <Loader>Sending your data. Please, wait.</Loader>}
     </div>
   );
 };
