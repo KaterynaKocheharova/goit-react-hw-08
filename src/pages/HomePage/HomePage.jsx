@@ -1,18 +1,19 @@
 import Text from "../../components/Text/Text";
-import css from "./HomePage.module.css";
+import Container from "../../components/common/Container/Container";
+import Section from "../../components/common/Section/Section";
 
 const HomePage = () => {
   return (
-    <section className={css["home-section"]}>
-      <div className={css["home-page-container"]}>
+    <Section>
+      <Container>
         <Text isCentered accented>
           Welcome To The Contacts App!
         </Text>
         <Text isCentered>
           You can register, login, and keep your contacts here.
         </Text>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 };
 

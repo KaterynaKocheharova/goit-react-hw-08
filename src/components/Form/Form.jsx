@@ -51,21 +51,35 @@ const BaseForm = ({ children, onSubmit, isRegistrationForm }) => {
     >
       <Form className={css.form}>
         {isRegistrationForm && (
-          <div>
-            <label htmlFor="name">Your name</label>
-            <Field name="name" type="text" />
-            <ErrorMessage name="name" />
+          <div className={css["form-group"]}>
+            <label className={css.label} htmlFor="name">
+              Your name
+            </label>
+            <Field className={css["form-field"]} name="name" type="text" />
+            <ErrorMessage
+              className={css["error-message"]}
+              name="name"
+              component="div"
+            />
           </div>
         )}
-        <div>
-          <label htmlFor="email">Email</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" />
+        <div className={css["form-group"]}>
+          <label className={css.label} htmlFor="email">
+            Email
+          </label>
+          <Field className={css["form-field"]} name="email" type="email" />
+          <ErrorMessage className={css["error-message"]} name="email" />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <Field name="password" type="password" />
-          <ErrorMessage name="password" />
+        <div className={css["form-group"]}>
+          <label className={css.label} htmlFor="password">
+            Password
+          </label>
+          <Field
+            className={css["form-field"]}
+            name="password"
+            type="password"
+          />
+          <ErrorMessage className={css["error-message"]} name="password" />
         </div>
         {children}
       </Form>
