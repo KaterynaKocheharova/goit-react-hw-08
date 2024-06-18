@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/auth/operations";
-import { Toaster } from "react-hot-toast";
 import { activateErrorToast } from "../../js/toast";
 import { selectIsLoading } from "../../redux/auth/selectors";
 import BaseForm from "../Form/Form";
@@ -24,7 +23,6 @@ const RegistrationForm = () => {
       <BaseForm onSubmit={onSubmit} isRegistrationForm>
         <Button type="auth">Register</Button>
       </BaseForm>
-      <Toaster />
       {isLoading && <Loader>Sending your data. Please, wait.</Loader>}
     </div>
   );

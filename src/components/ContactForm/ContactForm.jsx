@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { Formik, Field, Form } from "formik";
 import { ErrorMessage } from "formik";
+import { activateSuccessToast } from "../../js/toast";
 import * as Yup from "yup";
 import { useId } from "react";
 import css from "./ContactForm.module.css";
@@ -23,44 +24,50 @@ export default function ContactForm() {
   const dispatch = useDispatch();
 
   function handleSubmit(values, actions) {
-    dispatch(addContact(values));
+    dispatch(addContact(values))
+      .unwrap()
+      .then(() => {
+        activateSuccessToast("Contact successfully created");
+      });
     actions.resetForm();
   }
 
   return (
-    <Formik
-      initialValues={{
-        name: "",
-        number: "",
-      }}
-      onSubmit={handleSubmit}
-      validationSchema={AddContactSchema}
-    >
-      <Form className={css.form}>
-        <div className={css["inputs-container"]}>
-          <div className={css["form-input-box"]}>
-            <label htmlFor={nameId}>Name</label>
-            <Field className={css.input} id={nameId} name="name" />
-            <ErrorMessage
-              className={css["error-message"]}
-              name="name"
-              component="span"
-            />
+    <>
+      <Formik
+        initialValues={{
+          name: "",
+          number: "",
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={AddContactSchema}
+      >
+        <Form className={css.form}>
+          <div className={css["inputs-container"]}>
+            <div className={css["form-input-box"]}>
+              <label htmlFor={nameId}>Name</label>
+              <Field className={css.input} id={nameId} name="name" />
+              <ErrorMessage
+                className={css["error-message"]}
+                name="name"
+                component="span"
+              />
+            </div>
+            <div className={css["form-input-box"]}>
+              <label htmlFor={numberId}>Number</label>
+              <Field className={css.input} id={numberId} name="number" />
+              <ErrorMessage
+                className={css["error-message"]}
+                name="number"
+                component="span"
+              />
+            </div>
           </div>
-          <div className={css["form-input-box"]}>
-            <label htmlFor={numberId}>Number</label>
-            <Field className={css.input} id={numberId} name="number" />
-            <ErrorMessage
-              className={css["error-message"]}
-              name="number"
-              component="span"
-            />
-          </div>
-        </div>
-        <button className={css.button} type="submit">
-          Add contact
-        </button>
-      </Form>
-    </Formik>
+          <button className={css.button} type="submit">
+            Add contact
+          </button>
+        </Form>
+      </Formik>
+    </>
   );
 }

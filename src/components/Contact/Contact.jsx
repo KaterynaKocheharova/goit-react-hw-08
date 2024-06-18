@@ -5,6 +5,7 @@ import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
+import { activateSuccessToast } from "../../js/toast";
 
 export default function Contact({ contactData: { name, number, id } }) {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -17,7 +18,11 @@ export default function Contact({ contactData: { name, number, id } }) {
 
   function closeModal() {
     setIsOpen(false);
-    dispatch(deleteContact(id));
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        activateSuccessToast("Contact successfully deleted");
+      });
   }
 
   return (
@@ -45,8 +50,3 @@ export default function Contact({ contactData: { name, number, id } }) {
     </>
   );
 }
-
-// whech I click on the button
-// activate the modal window
-// in the window I'll have another button
-// this button will close the modal and dispatch deleteing

@@ -1,16 +1,19 @@
 import toast from "react-hot-toast";
 
-const ERROR_400_REGISTER = "It seems like the user with such data already exists";
+const ERROR_400_REGISTER =
+  "It seems like the user with such data already exists";
 const ERROR_400_LOGIN = "The email or password or both are incorrect";
-const GENERIC_ERROR = "Oops. Something went wrong. Try again later. Maybe something is wrong with your internet.";
+const GENERIC_ERROR =
+  "Oops. Something went wrong. Try again later. Maybe something is wrong with your internet.";
+
+const globalParams = {
+  duration: 2000,
+  position: "top-right",
+};
 
 export const activateErrorToast = (error, formType) => {
   const message = getErrorMessage(error, formType);
-  
-  toast.error(message, {
-    duration: 2000,
-    position: "top-right",
-  });
+  toast.error(message, globalParams);
 };
 
 const getErrorMessage = (error, formType) => {
@@ -26,4 +29,8 @@ const getErrorMessage = (error, formType) => {
   } else {
     return GENERIC_ERROR;
   }
+};
+
+export const activateSuccessToast = (message) => {
+  toast.success(message, globalParams);
 };
