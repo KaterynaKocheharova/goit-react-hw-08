@@ -4,7 +4,7 @@ import Section from "../../components/common/Section/Section";
 
 const HomePage = () => {
   return (
-    <Section>
+    <Section type="home-page">
       <Container>
         <Text isCentered accented>
           Welcome To The Contacts App!

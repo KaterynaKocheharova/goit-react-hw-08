@@ -1,0 +1,21 @@
+.user-menu-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.logout-link {
+  display: block;
+  cursor: pointer;
+}
+
+.user-menu-container .logout-icon {
+  display: block;
+  width: 2rem;
+  height: 1.5rem;
+}
+
+.user-menu-text {
+  font-weight: 500;
+}
