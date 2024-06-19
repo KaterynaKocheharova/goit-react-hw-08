@@ -1,7 +1,6 @@
 @media screen and (min-width: 768px) {
   .top-container {
     display: flex;
-    justify-content: center;
     column-gap: 3rem;
     flex-wrap: wrap;
   }

@@ -1,4 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
+import Container from "../../components/common/Container/Container";
+import Section from "../../components/common/Section/Section";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import ContactList from "../../components/ContactList/ContactList";
@@ -17,16 +19,18 @@ const ContactsPage = () => {
   }, [dispatch]);
 
   return (
-    <div className={css.container}>
-      <h1 className={css["main-title"]}>Phonebook</h1>
-      <div className={css["top-container"]}>
-        <ContactForm />
-        <SearchBox />
-      </div>
-      {isLoading && <p>Loading contacts. Please, wait</p>}
-      {error && <p>{error}</p>}
-      <ContactList />
-    </div>
+    <Section>
+      <Container>
+        <h1 className={css["main-title"]}>Phonebook</h1>
+        <div className={css["top-container"]}>
+          <ContactForm />
+          <SearchBox />
+        </div>
+        {isLoading && <p>Loading contacts. Please, wait</p>}
+        {error && <p>{error}</p>}
+        <ContactList />
+      </Container>
+    </Section>
   );
 };
 
