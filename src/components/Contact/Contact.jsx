@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
@@ -10,7 +10,7 @@ export default function Contact({ contactData: { name, number, id } }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingNumber, setIsEditingNumber] = useState(false);
-  const [contactData, setContactData] = useState({ name, number });
+  const [contactData, setContactData] = useState({ name, number, id });
   const dispatch = useDispatch();
 
   const toggleEditingName = () => {
@@ -28,12 +28,7 @@ export default function Contact({ contactData: { name, number, id } }) {
       toggleEditingNumber();
     }
 
-    dispatch(
-      updateContact({
-        id,
-        ...contactData,
-      })
-    );
+    dispatch(updateContact(contactData));
   };
 
   const editData = (e) => {
