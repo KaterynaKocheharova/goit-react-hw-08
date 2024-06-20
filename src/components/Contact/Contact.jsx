@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contacts/operations";
+import { deleteContact, updateContact } from "../../redux/contacts/operations";
 import { activateSuccessToast } from "../../js/toast";
 
 export default function Contact({ contactData: { name, number, id } }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingNumber, setIsEditingNumber] = useState(false);
-  const [inputData, setInputData] = useState({ name, number });
+  const [contactData, setContactData] = useState({ name, number });
+  const dispatch = useDispatch();
 
   const toggleEditingName = () => {
     setIsEditingName((prev) => !prev);
@@ -20,14 +21,27 @@ export default function Contact({ contactData: { name, number, id } }) {
     setIsEditingNumber((prev) => !prev);
   };
 
+  const handleOnBlur = (e) => {
+    if (e.target.name === "name") {
+      toggleEditingName();
+    } else if (e.target.name === "number") {
+      toggleEditingNumber();
+    }
+
+    dispatch(
+      updateContact({
+        id,
+        ...contactData,
+      })
+    );
+  };
+
   const editData = (e) => {
-    setInputData((data) => ({
+    setContactData((data) => ({
       ...data,
       [e.target.name]: e.target.value,
     }));
   };
-
-  const dispatch = useDispatch();
 
   function openModal() {
     setIsOpen(true);
@@ -51,15 +65,15 @@ export default function Contact({ contactData: { name, number, id } }) {
             {isEditingName ? (
               <input
                 type="text"
-                value={inputData.name}
+                value={contactData.name}
                 onChange={editData}
                 name="name"
-                onBlur={toggleEditingName}
+                onBlur={handleOnBlur}
                 autoFocus
               />
             ) : (
               <p className={css["name-text"]} onClick={toggleEditingName}>
-                {name}
+                {contactData.name}
               </p>
             )}
           </div>
@@ -69,14 +83,14 @@ export default function Contact({ contactData: { name, number, id } }) {
               <input
                 type="number"
                 name="number"
-                value={inputData.number}
+                value={contactData.number}
                 onChange={editData}
-                onBlur={toggleEditingNumber}
+                onBlur={handleOnBlur}
                 autoFocus
               />
             ) : (
               <p className={css["number-text"]} onClick={toggleEditingNumber}>
-                {number}
+                {contactData.number}
               </p>
             )}
           </div>
