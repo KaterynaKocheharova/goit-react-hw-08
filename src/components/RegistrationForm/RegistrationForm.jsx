@@ -20,7 +20,7 @@ const RegistrationForm = () => {
 
   return (
     <div>
-      <BaseForm onSubmit={onSubmit} isRegistrationForm>
+      <BaseForm onSubmit={onSubmit} type="registration-form">
         <Button type="auth">Register</Button>
       </BaseForm>
       {isLoading && <Loader>Sending your data. Please, wait.</Loader>}

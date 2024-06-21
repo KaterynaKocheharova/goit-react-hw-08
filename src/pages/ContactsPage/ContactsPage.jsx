@@ -21,7 +21,9 @@ const ContactsPage = () => {
   return (
     <Section>
       <Container>
-        <h1 className={css["main-title"]}>Phonebook</h1>
+        <h1 className={css["main-title"]}>
+          Manage your contacts here - add, update or delete them!
+        </h1>
         <div className={css["top-container"]}>
           <ContactForm />
           <SearchBox />

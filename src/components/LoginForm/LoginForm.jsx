@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <BaseForm onSubmit={onSubmit}>
+      <BaseForm onSubmit={onSubmit} type="login-form">
         <Button type="auth">Log in</Button>
       </BaseForm>
       {isLoading && <Loader>Sending your data. Please, wait.</Loader>}

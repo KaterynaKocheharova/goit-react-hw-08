@@ -1,5 +1,7 @@
 .link {
   padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--accent-color);
 }
 
 @media screen and (min-width: 500px) {
@@ -10,5 +12,4 @@
 
 .active-link {
   background-color: var(--main-background-color);
-  border-radius: 5px;
 }
