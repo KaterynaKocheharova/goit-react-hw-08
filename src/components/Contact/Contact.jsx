@@ -18,9 +18,9 @@ export default function Contact({ contactData: { name, number, id } }) {
     setIsEditing((prev) => (prev === field ? null : field));
   };
 
-  const handleOnBlur = () => {
-    setIsEditing(null);
-  };
+  // const handleOnBlur = () => {
+  //   setIsEditing(null);
+  // };
 
   useEffect(() => {
     if(isEditing) {
@@ -44,7 +44,9 @@ export default function Contact({ contactData: { name, number, id } }) {
   const doUpdateContact = () => {
     dispatch(updateContact(contactData))
     .unwrap()
-    .then(() => activateSuccessToast("Contact successfully updated"))
+    .then(() => {
+      activateSuccessToast("Contact successfully updated");
+      setIsEditing(false)})
     .catch((error) => activateErrorToast(error));
   }
 
@@ -73,7 +75,7 @@ export default function Contact({ contactData: { name, number, id } }) {
                 value={contactData.name}
                 onChange={editData}
                 name="name"
-                onBlur={handleOnBlur}
+                // onBlur={handleOnBlur}
                 autoFocus
               />
             ) : (
@@ -93,7 +95,7 @@ export default function Contact({ contactData: { name, number, id } }) {
                 name="number"
                 value={contactData.number}
                 onChange={editData}
-                onBlur={handleOnBlur}
+                // onBlur={handleOnBlur}
                 autoFocus
               />
             ) : (
