@@ -25,7 +25,7 @@ const ContactsPage = () => {
           Manage your contacts here - add, update or delete them!
         </h1>
         <div className={css["top-container"]}>
-          <ContactForm />
+          <ContactForm/>
           <SearchBox />
         </div>
         {isLoading && <p>Loading contacts. Please, wait</p>}

@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { activateSuccessToast } from "../../js/toast";
 import BaseForm from "../Form/Form";
+import Button from "../common/Button/Button"
 // import { useId } from "react";
 
 export default function ContactForm() {
@@ -19,5 +20,7 @@ export default function ContactForm() {
     actions.resetForm();
   }
 
-  return <BaseForm onSubmit={handleSubmit} type="add-contact-form"></BaseForm>;
+  return <BaseForm onSubmit={handleSubmit} type="add-contact-form">
+    <Button>Add contact</Button>
+  </BaseForm>;
 }
