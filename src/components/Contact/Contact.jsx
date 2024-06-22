@@ -1,3 +1,113 @@
+// import { useState } from "react";
+// import { CiUser, CiPhone } from "react-icons/ci";
+// import CustomModal from "../Modal/Modal";
+// import css from "./Contact.module.css";
+// import { useDispatch } from "react-redux";
+// import { deleteContact, updateContact } from "../../redux/contacts/operations";
+// import { activateErrorToast, activateSuccessToast } from "../../js/toast";
+
+// export default function Contact({ contactData: { name, number, id } }) {
+//   const [modalIsOpen, setIsOpen] = useState(false);
+//   const [isEditingName, setIsEditingName] = useState(false);
+//   const [isEditingNumber, setIsEditingNumber] = useState(false);
+//   const [contactData, setContactData] = useState({ name, number, id });
+//   const dispatch = useDispatch();
+
+//   const toggleEditingName = () => {
+//     setIsEditingName((prev) => !prev);
+//   };
+
+//   const toggleEditingNumber = () => {
+//     setIsEditingNumber((prev) => !prev);
+//   };
+
+//   const handleOnBlur = (e) => {
+//     if (e.target.name === "name") {
+//       toggleEditingName();
+//     } else if (e.target.name === "number") {
+//       toggleEditingNumber();
+//     }
+
+//     dispatch(updateContact(contactData))
+//       .unwrap()
+//       .then(() => activateSuccessToast("Contact successfully updated"))
+//       .catch((error) => activateErrorToast(error));
+//   };
+
+//   const editData = (e) => {
+//     setContactData((data) => ({
+//       ...data,
+//       [e.target.name]: e.target.value,
+//     }));
+//   };
+
+//   function openModal() {
+//     setIsOpen(true);
+//   }
+
+//   function closeModal() {
+//     setIsOpen(false);
+//     dispatch(deleteContact(id))
+//       .unwrap()
+//       .then(() => {
+//         activateSuccessToast("Contact successfully deleted");
+//       });
+//   }
+
+//   return (
+//     <>
+//       <li className={css["contact-item"]}>
+//         <div className={css["contact-info-wrapper"]}>
+//           <div className={css["item-icon-box"]}>
+//             <CiUser className={css["contact-person-icon"]} />
+//             {isEditingName ? (
+//               <input
+//                 type="text"
+//                 value={contactData.name}
+//                 onChange={editData}
+//                 name="name"
+//                 onBlur={handleOnBlur}
+//                 autoFocus
+//               />
+//             ) : (
+//               <p className={css["name-text"]} onClick={toggleEditingName}>
+//                 {contactData.name}
+//               </p>
+//             )}
+//           </div>
+//           <div className={css["item-icon-box"]}>
+//             <CiPhone className={css["contact-phone-icon"]} />
+//             {isEditingNumber ? (
+//               <input
+//                 type="number"
+//                 name="number"
+//                 value={contactData.number}
+//                 onChange={editData}
+//                 onBlur={handleOnBlur}
+//                 autoFocus
+//               />
+//             ) : (
+//               <p className={css["number-text"]} onClick={toggleEditingNumber}>
+//                 {contactData.number}
+//               </p>
+//             )}
+//           </div>
+//         </div>
+//         <button className={css["delete-button"]} onClick={openModal}>
+//           Delete contact
+//         </button>
+//       </li>
+//       <CustomModal
+//         closeModal={closeModal}
+//         modalIsOpen={modalIsOpen}
+//         type="deleteContactModal"
+//       />
+//     </>
+//   );
+// }
+
+
+
 import { useState } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
@@ -8,26 +118,16 @@ import { activateErrorToast, activateSuccessToast } from "../../js/toast";
 
 export default function Contact({ contactData: { name, number, id } }) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [isEditingNumber, setIsEditingNumber] = useState(false);
+  const [isEditing, setIsEditing] = useState(null); // 'name' or 'number' or null
   const [contactData, setContactData] = useState({ name, number, id });
   const dispatch = useDispatch();
 
-  const toggleEditingName = () => {
-    setIsEditingName((prev) => !prev);
+  const toggleEditing = (field) => {
+    setIsEditing((prev) => (prev === field ? null : field));
   };
 
-  const toggleEditingNumber = () => {
-    setIsEditingNumber((prev) => !prev);
-  };
-
-  const handleOnBlur = (e) => {
-    if (e.target.name === "name") {
-      toggleEditingName();
-    } else if (e.target.name === "number") {
-      toggleEditingNumber();
-    }
-
+  const handleOnBlur = () => {
+    setIsEditing(null);
     dispatch(updateContact(contactData))
       .unwrap()
       .then(() => activateSuccessToast("Contact successfully updated"))
@@ -60,7 +160,7 @@ export default function Contact({ contactData: { name, number, id } }) {
         <div className={css["contact-info-wrapper"]}>
           <div className={css["item-icon-box"]}>
             <CiUser className={css["contact-person-icon"]} />
-            {isEditingName ? (
+            {isEditing === "name" ? (
               <input
                 type="text"
                 value={contactData.name}
@@ -70,14 +170,14 @@ export default function Contact({ contactData: { name, number, id } }) {
                 autoFocus
               />
             ) : (
-              <p className={css["name-text"]} onClick={toggleEditingName}>
+              <p className={css["name-text"]} onClick={() => toggleEditing("name")}>
                 {contactData.name}
               </p>
             )}
           </div>
           <div className={css["item-icon-box"]}>
             <CiPhone className={css["contact-phone-icon"]} />
-            {isEditingNumber ? (
+            {isEditing === "number" ? (
               <input
                 type="number"
                 name="number"
@@ -87,7 +187,7 @@ export default function Contact({ contactData: { name, number, id } }) {
                 autoFocus
               />
             ) : (
-              <p className={css["number-text"]} onClick={toggleEditingNumber}>
+              <p className={css["number-text"]} onClick={() => toggleEditing("number")}>
                 {contactData.number}
               </p>
             )}
