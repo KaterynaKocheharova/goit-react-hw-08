@@ -4,7 +4,7 @@ import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
 import { deleteContact, updateContact } from "../../redux/contacts/operations";
-import { activateSuccessToast } from "../../js/toast";
+import { activateErrorToast, activateSuccessToast } from "../../js/toast";
 
 export default function Contact({ contactData: { name, number, id } }) {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -28,7 +28,10 @@ export default function Contact({ contactData: { name, number, id } }) {
       toggleEditingNumber();
     }
 
-    dispatch(updateContact(contactData));
+    dispatch(updateContact(contactData))
+      .unwrap()
+      .then(() => activateSuccessToast("Contact successfully updated"))
+      .catch((error) => activateErrorToast(error));
   };
 
   const editData = (e) => {

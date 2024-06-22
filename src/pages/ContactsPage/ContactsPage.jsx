@@ -29,7 +29,12 @@ const ContactsPage = () => {
           <SearchBox />
         </div>
         {isLoading && <p>Loading contacts. Please, wait</p>}
-        {error && <p>{error}</p>}
+        {error && (
+          <p>
+            Ooops. Something went wrong. Check out the internet connection or
+            try again later.
+          </p>
+        )}
         <ContactList />
       </Container>
     </Section>
