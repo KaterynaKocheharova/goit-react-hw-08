@@ -27,3 +27,5 @@ const CustomModal = ({ closeModal, modalIsOpen, type, doSomething }) => {
 };
 
 export default CustomModal;
+
+
