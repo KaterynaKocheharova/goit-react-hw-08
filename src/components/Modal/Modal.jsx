@@ -1,10 +1,15 @@
 import Modal from "react-modal";
+import css from "./Modal.module.css";
 
 Modal.setAppElement("#App");
 
 const CustomModal = ({ closeModal, modalIsOpen, type, doSomething }) => {
   return (
-    <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+    <Modal
+      className={css.modal}
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+    >
       <>
         <div>
           {type === "deleteContactModal"
@@ -27,5 +32,3 @@ const CustomModal = ({ closeModal, modalIsOpen, type, doSomething }) => {
 };
 
 export default CustomModal;
-
-
