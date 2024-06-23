@@ -2,6 +2,7 @@
   align-self: center;
   padding: 1.5rem;
   border: 0;
+  border: 1px solid var(--accent-color);
   background-color: var(--second-color);
   border-radius: var(--main-border-radius);
   cursor: pointer;
