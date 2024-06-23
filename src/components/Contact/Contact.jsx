@@ -18,10 +18,6 @@ export default function Contact({ contactData: { name, number, id } }) {
     setIsEditing((prev) => (prev === field ? null : field));
   };
 
-  // const handleOnBlur = () => {
-  //   setIsEditing(null);
-  // };
-
   useEffect(() => {
     if(isEditing) {
       setModalType("editingContactModal")
@@ -109,7 +105,7 @@ export default function Contact({ contactData: { name, number, id } }) {
           </div>
         </div>
         <button className={css["delete-button"]} onClick={openModal}>
-          {isEditing ? "Update contact" : "Deelete contact"}
+          {isEditing ? "Update" : "Delete"}
         </button>
       </li>
       <CustomModal

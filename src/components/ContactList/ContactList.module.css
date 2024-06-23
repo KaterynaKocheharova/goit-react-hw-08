@@ -1,5 +1,20 @@
 .contact-list {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(1, 250px);
+  gap: 2rem;
+  justify-content: center;
 }
+
+@media screen and (min-width: 600px) {
+  .contact-list {
+    grid-template-columns: repeat(2, 250px);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .contact-list {
+    grid-template-columns: repeat(2, 350px);
+  }
+}
+
+

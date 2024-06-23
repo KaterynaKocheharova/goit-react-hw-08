@@ -1,9 +1,10 @@
 .contact-item {
-  max-width: 100%;
   display: flex;
   justify-content: space-between;
-  column-gap: 2rem;
-  padding: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
   background-color: var(--main-background-color);
   border: 1px solid var(--first-color);
   border-radius: var(--main-border-radius);
@@ -24,6 +25,7 @@
 
 .delete-button {
   align-self: center;
+  font-size: 14px;
   padding: 1rem;
   border: 0;
   background-color: var(--first-color);
@@ -54,5 +56,5 @@
 .contact-info-wrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 2rem;
+  row-gap: 1rem;
 }
