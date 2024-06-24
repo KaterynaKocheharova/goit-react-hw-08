@@ -1,10 +1,16 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useId } from "react";
 import getValidationSchema from "../../js/validation-schemas";
 import getInitialValues from "../../js/form-init-values";
 import css from "./Form.module.css";
 import clsx from "clsx";
 
 const BaseForm = ({ children, onSubmit, type }) => {
+  const emailId = useId();
+  const passwordId = useId();
+  const nameId = useId();
+  const numberId = useId();
+
   return (
     <Formik
       initialValues={getInitialValues(type)}
@@ -21,10 +27,10 @@ const BaseForm = ({ children, onSubmit, type }) => {
         {type === "add-contact-form" && (
           <>
             <div className={css["form-group"]}>
-              <label className={css.label} htmlFor="name">
+              <label className={css.label} htmlFor={nameId}>
                 Name
               </label>
-              <Field className={css["form-field"]} name="name" type="text" />
+              <Field className={css["form-field"]} id={nameId} name="name" type="text" />
               <ErrorMessage
                 className={css["error-message"]}
                 name="name"
@@ -32,10 +38,10 @@ const BaseForm = ({ children, onSubmit, type }) => {
               />
             </div>
             <div className={css["form-group"]}>
-              <label className={css.label} htmlFor="number">
+              <label className={css.label} htmlFor={numberId}>
                 Number
               </label>
-              <Field className={css["form-field"]} name="number" type="text" />
+              <Field className={css["form-field"]} id={numberId} name="number" type="text" />
               <ErrorMessage
                 className={css["error-message"]}
                 name="number"
@@ -48,10 +54,10 @@ const BaseForm = ({ children, onSubmit, type }) => {
         {(type === "registration-form" || type === "login-form") && (
           <>
             <div className={css["form-group"]}>
-              <label className={css.label} htmlFor="email">
+              <label className={css.label} htmlFor={emailId}>
                 Email
               </label>
-              <Field className={css["form-field"]} name="email" type="email" />
+              <Field className={css["form-field"]} id={emailId} name="email" type="email" />
               <ErrorMessage
                 className={css["error-message"]}
                 name="email"
@@ -59,11 +65,12 @@ const BaseForm = ({ children, onSubmit, type }) => {
               />
             </div>
             <div className={css["form-group"]}>
-              <label className={css.label} htmlFor="password">
+              <label className={css.label} htmlFor={passwordId}>
                 Password
               </label>
               <Field
                 className={css["form-field"]}
+                id={passwordId}
                 name="password"
                 type="password"
               />
@@ -78,10 +85,10 @@ const BaseForm = ({ children, onSubmit, type }) => {
 
         {type === "registration-form" && (
           <div className={css["form-group"]}>
-            <label className={css.label} htmlFor="name">
+            <label className={css.label} htmlFor={nameId}>
               Your name
             </label>
-            <Field className={css["form-field"]} name="name" type="text" />
+            <Field className={css["form-field"]} id={nameId} name="name" type="text" />
             <ErrorMessage
               className={css["error-message"]}
               name="name"
