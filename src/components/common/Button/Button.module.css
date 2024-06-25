@@ -22,3 +22,8 @@
 .auth-btn:focus {
   background: var(--extra-color);
 }
+
+.modal-btn {
+  padding: 10px;
+  border-radius: 10px;
+}
