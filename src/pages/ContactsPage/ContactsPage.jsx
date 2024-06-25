@@ -8,6 +8,7 @@ import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
 import css from "./ContactsPage.module.css";
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
+import Loader from "../../components/Loader/Loader";
 
 const ContactsPage = () => {
   const error = useSelector(selectError);
@@ -28,7 +29,7 @@ const ContactsPage = () => {
           <ContactForm/>
           <SearchBox />
         </div>
-        {isLoading && <p>Loading contacts. Please, wait</p>}
+        {isLoading && <Loader>Loading contacts. Please, wait.</Loader>}
         {error && (
           <p>
             Ooops. Something went wrong. Check out the internet connection or
