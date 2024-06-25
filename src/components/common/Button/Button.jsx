@@ -12,9 +12,9 @@ const buildButtonClass = (type) => {
   }
 };
 
-const Button = ({ children, type }) => {
+const Button = ({ children, type, onClick }) => {
   return (
-    <button className={clsx(css.button, buildButtonClass(type))} type="submit">
+    <button className={clsx(css.button, buildButtonClass(type))} type="submit" onClick={onClick}>
       {children}
     </button>
   );
