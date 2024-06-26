@@ -8,6 +8,7 @@ import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
 import css from "./ContactsPage.module.css";
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
+import { Wave } from "react-animated-text";
 import Loader from "../../components/Loader/Loader";
 
 const ContactsPage = () => {
@@ -23,10 +24,17 @@ const ContactsPage = () => {
     <Section>
       <Container>
         <h1 className={css["main-title"]}>
-          Manage your contacts here - add, update or delete them!
+          <Wave
+            text={`Manage your contacts here - add, update or delete them!`}
+            // effect="fadeOut"
+            effect="color"
+            // effectChange={2.0}
+            effectChange="var(--extra-color)"
+            speed={15}
+          />
         </h1>
         <div className={css["top-container"]}>
-          <ContactForm/>
+          <ContactForm />
           <SearchBox />
         </div>
         {isLoading && <Loader>Loading contacts. Please, wait.</Loader>}
