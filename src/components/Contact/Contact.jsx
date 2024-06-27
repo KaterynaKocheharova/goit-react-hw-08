@@ -64,13 +64,10 @@ export default function Contact({ contactData: { name, number, id } }) {
   }
 
   const handleBlur = (e) => {
-    if (e.target === numberInputRef.current) {
-      setIsEditing("number");
-    } else if (e.target === nameInputRef) {
-      setIsEditing("name");
-    } else if (e.target !== buttonRef.current) {
-      setIsEditing(null);
+    if (e.relatedTarget === buttonRef.current) {
+      return;
     }
+    setIsEditing(null);
   };
 
   return (
