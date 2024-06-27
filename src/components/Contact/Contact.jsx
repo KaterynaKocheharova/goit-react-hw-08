@@ -65,17 +65,6 @@ export default function Contact({ contactData: { name, number, id } }) {
     document.body.style.overflow = "auto";
   }
 
-  const handleBlur = (e) => {
-    if (
-      e.relatedTarget !== buttonRef.current &&
-      e.relatedTarget !== nameInputRef.current &&
-      e.relatedTarget !== numberInputRef.current
-    ) {
-      setIsEditing(false);
-    }
-  };
-
-
   return (
     <>
       <li className={css["contact-item"]}>
@@ -88,7 +77,6 @@ export default function Contact({ contactData: { name, number, id } }) {
               value={contactData.name}
               onChange={editData}
               name="name"
-              onBlur={handleBlur}
               autoFocus
             />
           ) : (
@@ -110,7 +98,6 @@ export default function Contact({ contactData: { name, number, id } }) {
               name="number"
               value={contactData.number}
               onChange={editData}
-              onBlur={handleBlur}
               autoFocus
             />
           ) : (
@@ -142,3 +129,4 @@ export default function Contact({ contactData: { name, number, id } }) {
     </>
   );
 }
+
