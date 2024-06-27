@@ -14,7 +14,7 @@
 }
 
 .accented {
-  color: var(--accent-color);
+  color: var(--extra-color);
   font-size: 20px;
 }
 
