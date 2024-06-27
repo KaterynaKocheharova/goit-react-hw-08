@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect, useRef } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
@@ -15,8 +13,8 @@ export default function Contact({ contactData: { name, number, id } }) {
   const [modalType, setModalType] = useState("");
   const dispatch = useDispatch();
   const nameInputRef = useRef(null);
-  const numberInputRef = useRef(null);
-  const buttonRef = useRef(null);
+  const numberInputRef = useRef();
+  const buttonRef = useRef();
 
   const toggleEditing = (field) => {
     setIsEditing((prev) => (prev === field ? null : field));
@@ -65,6 +63,16 @@ export default function Contact({ contactData: { name, number, id } }) {
     document.body.style.overflow = "auto";
   }
 
+  const handleBlur = (e) => {
+    if (e.target === numberInputRef.current) {
+      setIsEditing("number");
+    } else if (e.target === nameInputRef) {
+      setIsEditing("name");
+    } else if (e.target !== buttonRef.current) {
+      setIsEditing(null);
+    }
+  };
+
   return (
     <>
       <li className={css["contact-item"]}>
@@ -77,6 +85,7 @@ export default function Contact({ contactData: { name, number, id } }) {
               value={contactData.name}
               onChange={editData}
               name="name"
+              onBlur={handleBlur}
               autoFocus
             />
           ) : (
@@ -99,6 +108,7 @@ export default function Contact({ contactData: { name, number, id } }) {
               value={contactData.number}
               onChange={editData}
               autoFocus
+              onBlur={handleBlur}
             />
           ) : (
             <div className={css["item-icon-box"]}>
@@ -129,4 +139,3 @@ export default function Contact({ contactData: { name, number, id } }) {
     </>
   );
 }
-
