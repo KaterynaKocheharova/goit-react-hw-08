@@ -1,6 +1,6 @@
 .contact-list {
   display: grid;
-  grid-template-columns: repeat(1, 270px);
+  grid-template-columns: repeat(1, auto);
   gap: 2rem;
   justify-content: center;
 }

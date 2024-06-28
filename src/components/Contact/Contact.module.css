@@ -1,8 +1,8 @@
 .contact-item {
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
   background-color: var(--main-background-color);
@@ -13,14 +13,7 @@
 
 .name-text,
 .number-text {
-  font-size: 0.8rem;
-}
-
-@media screen and (min-width: 700px) {
-  .name-text,
-  .number-text {
-    font-size: 1rem;
-  }
+  font-size: 14px;
 }
 
 .delete-button {
