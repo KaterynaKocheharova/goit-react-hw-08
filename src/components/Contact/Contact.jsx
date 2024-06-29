@@ -1,147 +1,5 @@
 
-// import { useState, useEffect, useRef } from "react";
-// import { CiUser, CiPhone } from "react-icons/ci";
-// import CustomModal from "../Modal/Modal";
-// import css from "./Contact.module.css";
-// import { useDispatch } from "react-redux";
-// import { deleteContact, updateContact } from "../../redux/contacts/operations";
-// import { activateErrorToast, activateSuccessToast } from "../../js/toast";
-
-// export default function Contact({ contactData: initialContactData }) {
-//   const [modalIsOpen, setIsOpen] = useState(false);
-//   const [isEditing, setIsEditing] = useState(null);
-//   const [contactData, setContactData] = useState(initialContactData);
-//   const [modalType, setModalType] = useState("");
-//   const dispatch = useDispatch();
-//   const nameInputRef = useRef(null);
-//   const numberInputRef = useRef();
-//   const buttonRef = useRef();
-
-//   const toggleEditing = (field) => {
-//     setIsEditing((prev) => (prev === field ? null : field));
-//   };
-
-//   useEffect(() => {
-//     if (isEditing) {
-//       setModalType("editingContactModal");
-//     } else {
-//       setModalType("deleteContactModal");
-//     }
-//   }, [isEditing]);
-
-//   const editData = (e) => {
-//     setContactData((data) => ({
-//       ...data,
-//       [e.target.name]: e.target.value,
-//     }));
-//   };
-
-//   function openModal() {
-//     setIsOpen(true);
-//     document.body.style.overflow = "hidden";
-//   }
-
-//   const doUpdateContact = () => {
-//     dispatch(updateContact(contactData))
-//       .unwrap()
-//       .then(() => {
-//         activateSuccessToast("Contact successfully updated");
-//         setIsEditing(false);
-//       })
-//       .catch((error) => activateErrorToast(error));
-//   };
-
-//   function doDeleteContact() {
-//     dispatch(deleteContact(initialContactData.id))
-//       .unwrap()
-//       .then(() => {
-//         activateSuccessToast("Contact successfully deleted");
-//       });
-//   }
-
-//   function closeModal() {
-//     setIsOpen(false);
-//     document.body.style.overflow = "auto";
-//   }
-
-//   const handleBlur = (e) => {
-//     if (e.relatedTarget === buttonRef.current) {
-//       return;
-//     }
-//     setContactData(initialContactData);
-//     setIsEditing(null);
-//   };
-
-//   return (
-//     <>
-//       <li className={css["contact-item"]}>
-//         <div className={css["contact-info-wrapper"]}>
-//           {isEditing === "name" ? (
-//             <input
-//               ref={nameInputRef}
-//               className={css["contact-input"]}
-//               type="text"
-//               value={contactData.name}
-//               onChange={editData}
-//               name="name"
-//               onBlur={handleBlur}
-//               autoFocus
-//             />
-//           ) : (
-//             <div className={css["item-icon-box"]}>
-//               <CiUser className={css["contact-person-icon"]} />
-//               <p
-//                 className={css["name-text"]}
-//                 onClick={() => toggleEditing("name")}
-//               >
-//                 {contactData.name}
-//               </p>
-//             </div>
-//           )}
-//           {isEditing === "number" ? (
-//             <input
-//               ref={numberInputRef}
-//               className={css["contact-input"]}
-//               type="number"
-//               name="number"
-//               value={contactData.number}
-//               onChange={editData}
-//               autoFocus
-//               onBlur={handleBlur}
-//             />
-//           ) : (
-//             <div className={css["item-icon-box"]}>
-//               <CiPhone className={css["contact-phone-icon"]} />
-//               <p
-//                 className={css["number-text"]}
-//                 onClick={() => toggleEditing("number")}
-//               >
-//                 {contactData.number}
-//               </p>
-//             </div>
-//           )}
-//         </div>
-//         <button
-//           ref={buttonRef}
-//           className={css["delete-button"]}
-//           onClick={openModal}
-//         >
-//           {isEditing ? "Update" : "Delete"}
-//         </button>
-//       </li>
-//       <CustomModal
-//         closeModal={closeModal}
-//         modalIsOpen={modalIsOpen}
-//         type={modalType}
-//         doSomething={isEditing ? doUpdateContact : doDeleteContact}
-//       />
-//     </>
-//   );
-// }
-
-
-
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
@@ -151,27 +9,24 @@ import { activateErrorToast, activateSuccessToast } from "../../js/toast";
 
 export default function Contact({ contactData: initialContactData }) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(null);
   const [contactData, setContactData] = useState(initialContactData);
-  const [modalType, setModalType] = useState("");
-  // const [discardField, setDiscardField] = useState(null); 
+  const [cardState, setCardState] = useState("initial-state");
+  const [previousCardState, setPreviousCardState] = useState("intitial-card-state");
   const dispatch = useDispatch();
-  const nameInputRef = useRef(null);
-  const numberInputRef = useRef();
   const buttonRef = useRef();
 
-  const toggleEditing = (field) => {
-    setIsEditing((prev) => (prev === field ? null : field));
-  };
+  // =========================== MODAL
+  function openModal() {
+    setIsOpen(true);
+    document.body.style.overflow = "hidden";
+  }
 
-  useEffect(() => {
-    if (isEditing) {
-      setModalType("editingContactModal");
-    } else {
-      setModalType("deleteContactModal");
-    }
-  }, [isEditing]);
+  function closeModal() {
+    setIsOpen(false);
+    document.body.style.overflow = "auto";
+  }
 
+  // ========================= EDITING DATA
   const editData = (e) => {
     setContactData((data) => ({
       ...data,
@@ -179,17 +34,23 @@ export default function Contact({ contactData: initialContactData }) {
     }));
   };
 
-  function openModal() {
-    setIsOpen(true);
-    document.body.style.overflow = "hidden";
-  }
+  // ============================================= HANDLING BLUR
+  const handleBlur = (e) => {
+    if (e.relatedTarget === buttonRef.current) {
+      return;
+    }
+    setPreviousCardState(cardState);
+    setCardState("discarding-changes-state");
+    openModal();
+  };
 
+  // ============================================ ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
     dispatch(updateContact(contactData))
       .unwrap()
       .then(() => {
         activateSuccessToast("Contact successfully updated");
-        setIsEditing(false);
+        setCardState("initial-state");
       })
       .catch((error) => activateErrorToast(error));
   };
@@ -202,33 +63,46 @@ export default function Contact({ contactData: initialContactData }) {
       });
   }
 
-  function closeModal() {
-    setIsOpen(false);
-    document.body.style.overflow = "auto";
-  }
+  const DoDiscardChanges = () => {
+    setContactData(initialContactData);
+    setCardState("initial-state");
+  };
 
-  const handleBlur = (e) => {
-    if (e.relatedTarget === buttonRef.current) {
-      return;
+  // ========================================== EXTRACTED FUNCTIONS
+  const handleCardButtonClick = () => {
+    if (cardState !== "name-editing-state" && cardState !== "number-editing-state") {
+      setCardState("deleting-state");
     }
-    // setDiscardField(isEditing);
-    setModalType("discardingChangesModal");
     openModal();
   };
 
-  const discardChanges = () => {
-    setContactData(initialContactData);
-    setIsEditing(null);
-    // closeModal();
+  const buildButtonText = () => {
+    return cardState === "initial-state" ? "Delete" : "Update";
   };
+
+  const buildModalAction = () => {
+    switch (cardState) {
+      case "discarding-changes-state":
+        return DoDiscardChanges;
+      case "name-editing-state":
+      case "number-editing-state":
+        return doUpdateContact;
+      case "deleting-state":
+        return doDeleteContact;
+      default:
+        return null;
+    }
+  };
+
+  // =================================== RENDERING
 
   return (
     <>
       <li className={css["contact-item"]}>
         <div className={css["contact-info-wrapper"]}>
-          {isEditing === "name" ? (
+          {cardState === "name-editing-state" ||
+          cardState === "discarding-changes-state" && previousCardState === "name-editing-state" ? (
             <input
-              ref={nameInputRef}
               className={css["contact-input"]}
               type="text"
               value={contactData.name}
@@ -242,15 +116,15 @@ export default function Contact({ contactData: initialContactData }) {
               <CiUser className={css["contact-person-icon"]} />
               <p
                 className={css["name-text"]}
-                onClick={() => toggleEditing("name")}
+                onClick={() => setCardState("name-editing-state")}
               >
                 {contactData.name}
               </p>
             </div>
           )}
-          {isEditing === "number" ? (
+          {cardState === "number-editing-state" ||
+          cardState === "discarding-changes-state" && previousCardState === "number-editing-state" ? (
             <input
-              ref={numberInputRef}
               className={css["contact-input"]}
               type="number"
               name="number"
@@ -264,7 +138,7 @@ export default function Contact({ contactData: initialContactData }) {
               <CiPhone className={css["contact-phone-icon"]} />
               <p
                 className={css["number-text"]}
-                onClick={() => toggleEditing("number")}
+                onClick={() => setCardState("number-editing-state")}
               >
                 {contactData.number}
               </p>
@@ -274,19 +148,18 @@ export default function Contact({ contactData: initialContactData }) {
         <button
           ref={buttonRef}
           className={css["delete-button"]}
-          onClick={openModal}
+          onClick={handleCardButtonClick}
         >
-          {isEditing ? "Update" : "Delete"}
+          {buildButtonText()}
         </button>
       </li>
       <CustomModal
         closeModal={closeModal}
         modalIsOpen={modalIsOpen}
-        type={modalType}
-        doSomething={
-          modalType === "discardingChangesModal" ? discardChanges : isEditing ? doUpdateContact : doDeleteContact
-        }
+        cardState={cardState}
+        doSomething={buildModalAction()}
       />
     </>
   );
 }
+
