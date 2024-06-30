@@ -70,8 +70,12 @@ export default function Contact({ contactData: initialContactData }) {
 
   // ========================================== EXTRACTED FUNCTIONS
   const handleCardButtonClick = () => {
-    if (cardState !== "name-editing-state" && cardState !== "number-editing-state") {
+    if (cardState !== "name-editing-state" && cardState !== "number-editing-state" && cardState !== "discarding-changes-state") {
       setCardState("deleting-state");
+    } else if(cardState === "discarding-changes-state" && previousCardState === "name-editing-state") {
+      setCardState("name-editing-state");
+    } else if(cardState === "discarding-changes-state" && previousCardState === "number-editing-state") {
+      setCardState("number-editing-state");
     }
     openModal();
   };
