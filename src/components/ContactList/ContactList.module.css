@@ -1,14 +1,12 @@
 .contact-list {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 250px;
   gap: 2rem;
   justify-content: center;
 }
 
 @media screen and (min-width: 600px) {
   .contact-list {
-    flex-direction: row;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, auto);
   }
 }
