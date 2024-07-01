@@ -9,6 +9,7 @@ import css from "./ContactsPage.module.css";
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { Wave } from "react-animated-text";
+import Error from "../../components/common/Error/Error";
 import Loader from "../../components/Loader/Loader";
 
 const ContactsPage = () => {
@@ -39,10 +40,10 @@ const ContactsPage = () => {
         </div>
         {isLoading && <Loader>Loading contacts. Please, wait.</Loader>}
         {error && (
-          <p>
+          <Error>
             Ooops. Something went wrong. Check out the internet connection or
             try again later.
-          </p>
+          </Error>
         )}
         <ContactList />
       </Container>

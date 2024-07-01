@@ -8,7 +8,6 @@ import { refreshUser } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader/Loader";
-import css from "./App.module.css";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>

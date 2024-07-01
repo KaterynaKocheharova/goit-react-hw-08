@@ -1,4 +1,3 @@
-
 import { useState, useRef } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
@@ -6,25 +5,20 @@ import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
 import { deleteContact, updateContact } from "../../redux/contacts/operations";
 import { activateErrorToast, activateSuccessToast } from "../../js/toast";
+import { UseModal } from "../../hooks/UseModal";
 
 export default function Contact({ contactData: initialContactData }) {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  // =========================== USE MODAL
+  const { modalIsOpen, openModal, closeModal } = UseModal();
+
+  // =========================== USE CONTACT DATA
   const [contactData, setContactData] = useState(initialContactData);
   const [cardState, setCardState] = useState("initial-state");
-  const [previousCardState, setPreviousCardState] = useState("intitial-card-state");
+  const [previousCardState, setPreviousCardState] = useState(
+    "intitial-card-state"
+  );
   const dispatch = useDispatch();
   const buttonRef = useRef();
-
-  // =========================== MODAL
-  function openModal() {
-    setIsOpen(true);
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-    document.body.style.overflow = "auto";
-  }
 
   // ========================= EDITING DATA
   const editData = (e) => {
@@ -70,11 +64,21 @@ export default function Contact({ contactData: initialContactData }) {
 
   // ========================================== EXTRACTED FUNCTIONS
   const handleCardButtonClick = () => {
-    if (cardState !== "name-editing-state" && cardState !== "number-editing-state" && cardState !== "discarding-changes-state") {
+    if (
+      cardState !== "name-editing-state" &&
+      cardState !== "number-editing-state" &&
+      cardState !== "discarding-changes-state"
+    ) {
       setCardState("deleting-state");
-    } else if(cardState === "discarding-changes-state" && previousCardState === "name-editing-state") {
+    } else if (
+      cardState === "discarding-changes-state" &&
+      previousCardState === "name-editing-state"
+    ) {
       setCardState("name-editing-state");
-    } else if(cardState === "discarding-changes-state" && previousCardState === "number-editing-state") {
+    } else if (
+      cardState === "discarding-changes-state" &&
+      previousCardState === "number-editing-state"
+    ) {
       setCardState("number-editing-state");
     }
     openModal();
@@ -105,7 +109,8 @@ export default function Contact({ contactData: initialContactData }) {
       <li className={css["contact-item"]}>
         <div className={css["contact-info-wrapper"]}>
           {cardState === "name-editing-state" ||
-          cardState === "discarding-changes-state" && previousCardState === "name-editing-state" ? (
+          (cardState === "discarding-changes-state" &&
+            previousCardState === "name-editing-state") ? (
             <input
               className={css["contact-input"]}
               type="text"
@@ -127,7 +132,8 @@ export default function Contact({ contactData: initialContactData }) {
             </div>
           )}
           {cardState === "number-editing-state" ||
-          cardState === "discarding-changes-state" && previousCardState === "number-editing-state" ? (
+          (cardState === "discarding-changes-state" &&
+            previousCardState === "number-editing-state") ? (
             <input
               className={css["contact-input"]}
               type="number"
@@ -166,4 +172,3 @@ export default function Contact({ contactData: initialContactData }) {
     </>
   );
 }
-
