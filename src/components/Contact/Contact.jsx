@@ -1,34 +1,30 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
-import { useDispatch } from "react-redux";
-import { deleteContact, updateContact } from "../../redux/contacts/operations";
-import { activateErrorToast, activateSuccessToast } from "../../js/toast";
 import { UseModal } from "../../hooks/UseModal";
+import { useContact } from "../../hooks/useContact";
 
 export default function Contact({ contactData: initialContactData }) {
   // =========================== USE MODAL
   const { modalIsOpen, openModal, closeModal } = UseModal();
-
-  // =========================== USE CONTACT DATA
-  const [contactData, setContactData] = useState(initialContactData);
-  const [cardState, setCardState] = useState("initial-state");
-  const [previousCardState, setPreviousCardState] = useState(
-    "intitial-card-state"
-  );
-  const dispatch = useDispatch();
   const buttonRef = useRef();
 
-  // ========================= EDITING DATA
-  const editData = (e) => {
-    setContactData((data) => ({
-      ...data,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // =========================== USE CONTACT
 
-  // ============================================= HANDLING BLUR
+  const {
+    contactData,
+    cardState,
+    setCardState,
+    previousCardState,
+    setPreviousCardState,
+    editData,
+    buildButtonText,
+    buildModalAction,
+  } = useContact(initialContactData);
+
+  // ========================= HANDLING BLUR
+
   const handleBlur = (e) => {
     if (e.relatedTarget === buttonRef.current) {
       return;
@@ -38,31 +34,8 @@ export default function Contact({ contactData: initialContactData }) {
     openModal();
   };
 
-  // ============================================ ACTIONS TO PASS TO THE MODAL
-  const doUpdateContact = () => {
-    dispatch(updateContact(contactData))
-      .unwrap()
-      .then(() => {
-        activateSuccessToast("Contact successfully updated");
-        setCardState("initial-state");
-      })
-      .catch((error) => activateErrorToast(error));
-  };
+  // ============================== CARD BUTTON CLICK
 
-  function doDeleteContact() {
-    dispatch(deleteContact(initialContactData.id))
-      .unwrap()
-      .then(() => {
-        activateSuccessToast("Contact successfully deleted");
-      });
-  }
-
-  const DoDiscardChanges = () => {
-    setContactData(initialContactData);
-    setCardState("initial-state");
-  };
-
-  // ========================================== EXTRACTED FUNCTIONS
   const handleCardButtonClick = () => {
     if (
       cardState !== "name-editing-state" &&
@@ -82,24 +55,6 @@ export default function Contact({ contactData: initialContactData }) {
       setCardState("number-editing-state");
     }
     openModal();
-  };
-
-  const buildButtonText = () => {
-    return cardState === "initial-state" ? "Delete" : "Update";
-  };
-
-  const buildModalAction = () => {
-    switch (cardState) {
-      case "discarding-changes-state":
-        return DoDiscardChanges;
-      case "name-editing-state":
-      case "number-editing-state":
-        return doUpdateContact;
-      case "deleting-state":
-        return doDeleteContact;
-      default:
-        return null;
-    }
   };
 
   // =================================== RENDERING
