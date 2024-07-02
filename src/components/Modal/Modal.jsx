@@ -69,12 +69,8 @@ const buildModalText = (cardState) => {
   switch (cardState) {
     case "deleting-state":
       return "Are you sure you want to delete the contact? Click delete if so.";
-    case "name-editing-state":
+    case "editing-state":
       return "Are you sure you want to edit the contact? You won't be able to get the previous version";
-    case "number-editing-state":
-      return "Are you sure you want to edit the contact? You won't be able to get the previous version";
-    case "discarding-changes-state":
-      return "Discard your changes?";
     default:
       return "";
   }
@@ -84,12 +80,8 @@ const buildModalButtonText = (cardState) => {
   switch (cardState) {
     case "deleting-state":
       return "delete";
-    case "name-editing-state":
+    case "editing-state":
       return "update";
-    case "number-editing-state":
-      return "update";
-    case "discarding-changes-state":
-      return "discard";
     default:
       return "";
   }

@@ -1,14 +1,14 @@
-import { useRef } from "react";
 import { CiUser, CiPhone } from "react-icons/ci";
 import CustomModal from "../Modal/Modal";
 import css from "./Contact.module.css";
 import { UseModal } from "../../hooks/UseModal";
 import { useContact } from "../../hooks/useContact";
+import { addContactValidationSchema } from "../../js/validation-schemas";
+import { activateErrorToastWithCustomMessage } from "../../js/toast";
 
 export default function Contact({ contactData: initialContactData }) {
   // =========================== USE MODAL
   const { modalIsOpen, openModal, closeModal } = UseModal();
-  const buttonRef = useRef();
 
   // =========================== USE CONTACT
 
@@ -17,44 +17,37 @@ export default function Contact({ contactData: initialContactData }) {
     cardState,
     setCardState,
     previousCardState,
-    setPreviousCardState,
     editData,
     buildButtonText,
     buildModalAction,
   } = useContact(initialContactData);
 
-  // ========================= HANDLING BLUR
+  // ============================= HANDLE TEXT CLICK
 
-  const handleBlur = (e) => {
-    if (e.relatedTarget === buttonRef.current) {
-      return;
-    }
-    setPreviousCardState(cardState);
-    setCardState("discarding-changes-state");
-    openModal();
+  const handleTextClick = () => {
+    setCardState("editing-state");
   };
 
   // ============================== CARD BUTTON CLICK
 
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
   const handleCardButtonClick = () => {
-    if (
-      cardState !== "name-editing-state" &&
-      cardState !== "number-editing-state" &&
-      cardState !== "discarding-changes-state"
-    ) {
+    if (cardState !== "editing-state") {
       setCardState("deleting-state");
-    } else if (
-      cardState === "discarding-changes-state" &&
-      previousCardState === "name-editing-state"
-    ) {
-      setCardState("name-editing-state");
-    } else if (
-      cardState === "discarding-changes-state" &&
-      previousCardState === "number-editing-state"
-    ) {
-      setCardState("number-editing-state");
+      openModal();
+    } else if (cardState === "editing-state") {
+      addContactValidationSchema
+        .validate(contactData)
+        .then(() => {
+          openModal();
+        })
+        .catch(() => {
+          activateErrorToastWithCustomMessage(
+            "Make sure your contact has between 3 and character and number has minimum 8 characters"
+          );
+        });
     }
-    openModal();
   };
 
   // =================================== RENDERING
@@ -63,32 +56,28 @@ export default function Contact({ contactData: initialContactData }) {
     <>
       <li className={css["contact-item"]}>
         <div className={css["contact-info-wrapper"]}>
-          {cardState === "name-editing-state" ||
+          {cardState === "editing-state" ||
           (cardState === "discarding-changes-state" &&
-            previousCardState === "name-editing-state") ? (
+            previousCardState === "editing-state") ? (
             <input
               className={css["contact-input"]}
               type="text"
               value={contactData.name}
               onChange={editData}
               name="name"
-              onBlur={handleBlur}
               autoFocus
             />
           ) : (
             <div className={css["item-icon-box"]}>
               <CiUser className={css["contact-person-icon"]} />
-              <p
-                className={css["name-text"]}
-                onClick={() => setCardState("name-editing-state")}
-              >
+              <p className={css["name-text"]} onClick={handleTextClick}>
                 {contactData.name}
               </p>
             </div>
           )}
-          {cardState === "number-editing-state" ||
+          {cardState === "editing-state" ||
           (cardState === "discarding-changes-state" &&
-            previousCardState === "number-editing-state") ? (
+            previousCardState === "editing-state") ? (
             <input
               className={css["contact-input"]}
               type="number"
@@ -96,22 +85,17 @@ export default function Contact({ contactData: initialContactData }) {
               value={contactData.number}
               onChange={editData}
               autoFocus
-              onBlur={handleBlur}
             />
           ) : (
             <div className={css["item-icon-box"]}>
               <CiPhone className={css["contact-phone-icon"]} />
-              <p
-                className={css["number-text"]}
-                onClick={() => setCardState("number-editing-state")}
-              >
+              <p className={css["number-text"]} onClick={handleTextClick}>
                 {contactData.number}
               </p>
             </div>
           )}
         </div>
         <button
-          ref={buttonRef}
           className={css["delete-button"]}
           onClick={handleCardButtonClick}
         >

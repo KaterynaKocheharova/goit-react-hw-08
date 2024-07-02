@@ -13,7 +13,7 @@ const registerValidationSchema = Yup.object().shape({
   password: Yup.string().required("Required"),
 });
 
-const addContactValidationSchema = Yup.object().shape({
+export const addContactValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")

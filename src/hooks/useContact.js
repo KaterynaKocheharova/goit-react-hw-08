@@ -6,10 +6,6 @@ import { activateSuccessToast, activateErrorToast } from "../js/toast";
 export const useContact = (initialContactData) => {
   const [contactData, setContactData] = useState(initialContactData);
   const [cardState, setCardState] = useState("initial-state");
-  const [previousCardState, setPreviousCardState] = useState(
-    "intitial-state"
-  );
-
   const dispatch = useDispatch();
 
   // ========================= EDITING DATA
@@ -22,6 +18,7 @@ export const useContact = (initialContactData) => {
 
   // ============================================ ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
+    
     dispatch(updateContact(contactData))
       .unwrap()
       .then(() => {
@@ -39,11 +36,6 @@ export const useContact = (initialContactData) => {
       });
   }
 
-  const DoDiscardChanges = () => {
-    setContactData(initialContactData);
-    setCardState("initial-state");
-  };
-
   // ========================================== EXTRACTED FUNCTIONS
 
   const buildButtonText = () => {
@@ -52,10 +44,7 @@ export const useContact = (initialContactData) => {
 
   const buildModalAction = () => {
     switch (cardState) {
-      case "discarding-changes-state":
-        return DoDiscardChanges;
-      case "name-editing-state":
-      case "number-editing-state":
+      case "editing-state":
         return doUpdateContact;
       case "deleting-state":
         return doDeleteContact;
@@ -68,8 +57,6 @@ export const useContact = (initialContactData) => {
     contactData,
     cardState,
     setCardState,
-    previousCardState,
-    setPreviousCardState,
     editData,
     buildButtonText,
     buildModalAction,
