@@ -1,6 +1,6 @@
-import Text from "../Text/Text";
-import Container from "../common/Container/Container";
-import Section from "../common/Section/Section";
+import Text from "../../Text/Text";
+import Container from "../Container/Container";
+import Section from "../Section/Section";
 
 const Loader = ({ children }) => {
   return (

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { Wave } from "react-animated-text";
 import Error from "../../components/common/Error/Error";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/common/Loader/Loader";
 
 const ContactsPage = () => {
   const error = useSelector(selectError);

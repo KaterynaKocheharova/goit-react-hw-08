@@ -3,7 +3,7 @@ import { register } from "../../redux/auth/operations";
 import { activateErrorToast } from "../../js/toast";
 import { selectIsLoading } from "../../redux/auth/selectors";
 import BaseForm from "../common/Form/Form";
-import Loader from "../Loader/Loader";
+import Loader from "../common/Loader/Loader";
 import Button from "../common/Button/Button";
 
 const RegistrationForm = () => {
