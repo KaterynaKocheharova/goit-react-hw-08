@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { activateErrorToast, activateSuccessToast } from "../../js/toast";
-import BaseForm from "../Form/Form";
+import BaseForm from "../common/Form/Form";
 import Button from "../common/Button/Button";
 import { selectContacts } from "../../redux/contacts/selectors";
 
