@@ -49,44 +49,49 @@ export default function Contact({ contactData: initialContactData }) {
 
   // =================================== RENDERING
 
+
+  const isEditing = cardState === "editing-state";
+
   return (
     <>
       <li className={css["contact-item"]}>
         <div className={css["contact-info-wrapper"]}>
-          {cardState === "editing-state" ? (
-            <input
-              className={css["contact-input"]}
-              type="text"
-              value={contactData.name}
-              onChange={editData}
-              name="name"
-              autoFocus
-            />
-          ) : (
-            <div className={css["item-icon-box"]}>
-              <CiUser className={css["contact-person-icon"]} />
+          <div className={css["item-icon-box"]}>
+            <CiUser className={css["contact-person-icon"]} />
+            {isEditing ? (
+              <input
+                className={css["contact-input"]}
+                type="text"
+                value={contactData.name}
+                onChange={editData}
+                name="name"
+                autoFocus
+              />
+            ) : 
+            (
               <p className={css["name-text"]} onClick={handleTextClick}>
                 {contactData.name}
               </p>
-            </div>
-          )}
-          {cardState === "editing-state" ? (
-            <input
-              className={css["contact-input"]}
-              type="number"
-              name="number"
-              value={contactData.number}
-              onChange={editData}
-              autoFocus
-            />
-          ) : (
-            <div className={css["item-icon-box"]}>
-              <CiPhone className={css["contact-phone-icon"]} />
+            )}
+          </div>
+          <div className={css["item-icon-box"]}>
+            <CiPhone className={css["contact-phone-icon"]} />
+            {isEditing ? (
+              <input
+                className={css["contact-input"]}
+                type="number"
+                name="number"
+                value={contactData.number}
+                onChange={editData}
+                autoFocus
+              />
+            ) : 
+            (
               <p className={css["number-text"]} onClick={handleTextClick}>
                 {contactData.number}
               </p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
         <button
           className={css["delete-button"]}
