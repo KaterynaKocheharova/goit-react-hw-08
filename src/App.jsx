@@ -7,7 +7,8 @@ import PrivateRoute from "./PrivateRoute";
 import { refreshUser } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { Toaster } from "react-hot-toast";
-import Loader from "./components/Loader/Loader";
+import Loader from "./components/common/Loader/Loader";
+
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
