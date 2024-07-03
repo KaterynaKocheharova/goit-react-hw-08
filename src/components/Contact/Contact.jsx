@@ -7,16 +7,16 @@ import { addContactValidationSchema } from "../../js/validation-schemas";
 import { activateErrorToastWithCustomMessage } from "../../js/toast";
 
 export default function Contact({ contactData: initialContactData }) {
-  // =========================== USE MODAL
+
+  // =========================== USE MODAL HOOK
   const { modalIsOpen, openModal, closeModal } = UseModal();
 
-  // =========================== USE CONTACT
+  // =========================== USE CONTACT HOOK
 
   const {
     contactData,
     cardState,
     setCardState,
-    previousCardState,
     editData,
     buildButtonText,
     buildModalAction,
@@ -29,9 +29,6 @@ export default function Contact({ contactData: initialContactData }) {
   };
 
   // ============================== CARD BUTTON CLICK
-
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
   const handleCardButtonClick = () => {
     if (cardState !== "editing-state") {
       setCardState("deleting-state");
@@ -56,9 +53,7 @@ export default function Contact({ contactData: initialContactData }) {
     <>
       <li className={css["contact-item"]}>
         <div className={css["contact-info-wrapper"]}>
-          {cardState === "editing-state" ||
-          (cardState === "discarding-changes-state" &&
-            previousCardState === "editing-state") ? (
+          {cardState === "editing-state" ? (
             <input
               className={css["contact-input"]}
               type="text"
@@ -75,9 +70,7 @@ export default function Contact({ contactData: initialContactData }) {
               </p>
             </div>
           )}
-          {cardState === "editing-state" ||
-          (cardState === "discarding-changes-state" &&
-            previousCardState === "editing-state") ? (
+          {cardState === "editing-state" ? (
             <input
               className={css["contact-input"]}
               type="number"
