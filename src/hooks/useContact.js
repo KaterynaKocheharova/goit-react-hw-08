@@ -16,6 +16,12 @@ export const useContact = (initialContactData) => {
     }));
   };
 
+    // ============================= HANDLE TEXT CLICK
+
+    const handleTextClick = () => {
+      setCardState("editing-state");
+    };
+
   // ============================================ ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
     
@@ -42,6 +48,8 @@ export const useContact = (initialContactData) => {
     return cardState === "initial-state" ? "Delete" : "Update";
   };
 
+
+
   const buildModalAction = () => {
     switch (cardState) {
       case "editing-state":
@@ -58,6 +66,7 @@ export const useContact = (initialContactData) => {
     cardState,
     setCardState,
     editData,
+    handleTextClick,
     buildButtonText,
     buildModalAction,
   };

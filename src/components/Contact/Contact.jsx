@@ -18,22 +18,22 @@ export default function Contact({ contactData: initialContactData }) {
     cardState,
     setCardState,
     editData,
+    handleTextClick,
     buildButtonText,
     buildModalAction,
   } = useContact(initialContactData);
 
-  // ============================= HANDLE TEXT CLICK
-
-  const handleTextClick = () => {
-    setCardState("editing-state");
-  };
-
   // ============================== CARD BUTTON CLICK
+
   const handleCardButtonClick = () => {
+
     if (cardState !== "editing-state") {
       setCardState("deleting-state");
       openModal();
-    } else if (cardState === "editing-state") {
+      return;
+    } 
+    
+    if (cardState === "editing-state") {
       addContactValidationSchema
         .validate(contactData)
         .then(() => {
@@ -41,7 +41,7 @@ export default function Contact({ contactData: initialContactData }) {
         })
         .catch(() => {
           activateErrorToastWithCustomMessage(
-            "Make sure your contact has between 3 and character and number has minimum 8 characters"
+            "Make sure your contact has between 3 and 50 characters and number has minimum 8 characters"
           );
         });
     }
