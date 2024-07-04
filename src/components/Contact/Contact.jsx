@@ -9,6 +9,7 @@ import { activateErrorToastWithCustomMessage } from "../../js/toast";
 export default function Contact({ contactData: initialContactData }) {
 
   // =========================== USE MODAL HOOK
+  
   const { modalIsOpen, openModal, closeModal } = UseModal();
 
   // =========================== USE CONTACT HOOK
