@@ -5,6 +5,7 @@ import { useContact } from "../../hooks/useContact";
 import { addContactValidationSchema } from "../../js/validation-schemas";
 import { activateErrorToastWithCustomMessage } from "../../js/toast";
 import ContactBody from "./ContactBody";
+import ContactButton from "./ContactButton";
 
 export default function Contact({ contactData: initialContactData }) {
   // =========================== USE MODAL HOOK
@@ -59,12 +60,12 @@ export default function Contact({ contactData: initialContactData }) {
           editData={editData}
           handleTextClick={handleTextClick}
         />
-        <button
+        <ContactButton
           className={css["delete-button"]}
-          onClick={handleCardButtonClick}
+          handleClick={handleCardButtonClick}
+          buttonText={buildButtonText()}
         >
-          {buildButtonText()}
-        </button>
+        </ContactButton>
       </li>
       <CustomModal
         closeModal={closeModal}
