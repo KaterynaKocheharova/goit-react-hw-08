@@ -1,23 +1,9 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import { useId } from "react";
 import getValidationSchema from "../../../js/validation-schemas";
 import getInitialValues from "../../../js/form-init-values";
 import { buildFormClassName } from "./FormHelpers";
-import css from "./Form.module.css";
-
-const FormGroup = ({ id, label, name, type }) => (
-  <div className={css["form-group"]}>
-    <label className={css.label} htmlFor={id}>
-      {label}
-    </label>
-    <Field className={css["form-field"]} id={id} name={name} type={type} />
-    <ErrorMessage
-      className={css["error-message"]}
-      name={name}
-      component="div"
-    />
-  </div>
-);
+import { FormGroup } from "./FormGroup";
 
 const BaseForm = ({ children, onSubmit, type }) => {
   const emailId = useId();

@@ -1,11 +1,7 @@
 import Text from "../Text/Text";
 
 const Error = ({ children }) => {
-  return (
-    <Text inCentered>
-      <p>{children}</p>
-    </Text>
-  )
+  return <Text inCentered>{children}</Text>;
 };
 
 export default Error;
