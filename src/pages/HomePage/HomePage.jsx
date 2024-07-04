@@ -1,4 +1,4 @@
-import Text from "../../components/Text/Text";
+import Text from "../../components/common/Text/Text";
 import Container from "../../components/common/Container/Container";
 import Section from "../../components/common/Section/Section";
 import { Wave } from "react-animated-text";
