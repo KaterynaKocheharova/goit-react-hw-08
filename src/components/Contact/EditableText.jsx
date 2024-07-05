@@ -7,7 +7,7 @@ const EditableText = ({
   handleChange,
   name,
   handleClick,
-  type,
+  clickedInput,
 }) => {
   const inputRef = useRef(null);
 
@@ -20,19 +20,25 @@ const EditableText = ({
   if (isEditing) {
     return (
       <input
-        ref={inputRef}
         className={css["contact-input"]}
         type={name === "number" ? "number" : "text"}
         value={value}
         onChange={handleChange}
         name={name}
-        // autoFocus
+        autoFocus={
+          (name === "number" && clickedInput === "numberInput") ||
+          (name === "name" && clickedInput === "nameInput")
+        }
       />
     );
   }
 
   return (
-    <p className={css[`${name}-text`]} onClick={handleClick} data-type={type}>
+    <p
+      className={css[`${name}-text`]}
+      onClick={handleClick}
+      data-type={name === "number" ? "numberInput" : "nameInput"}
+    >
       {value}
     </p>
   );

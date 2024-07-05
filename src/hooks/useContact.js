@@ -6,6 +6,7 @@ import { activateSuccessToast, activateErrorToast } from "../js/toast";
 export const useContact = (initialContactData) => {
   const [contactData, setContactData] = useState(initialContactData);
   const [cardState, setCardState] = useState("initial-state");
+  const [clickedInput, setClickedInput] = useState("");
   const dispatch = useDispatch();
 
   // ========================= EDITING DATA
@@ -18,7 +19,9 @@ export const useContact = (initialContactData) => {
 
     // ============================= HANDLE TEXT CLICK
 
-    const handleTextClick = () => {
+    const handleTextClick = (e) => {
+      const inputType = e.target.getAttribute("data-type");
+      setClickedInput(inputType);
       setCardState("editing-state");
     };
 
@@ -69,5 +72,6 @@ export const useContact = (initialContactData) => {
     handleTextClick,
     buildButtonText,
     buildModalAction,
+    clickedInput
   };
 };

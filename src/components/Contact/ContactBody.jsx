@@ -7,13 +7,14 @@ const ContactBody = ({
   contactData,
   editData,
   handleTextClick,
+  clickedInput,
 }) => {
-
   return (
     <div className={css["contact-info-wrapper"]}>
       <div className={css["editable-input"]}>
         <CiUser className={css["contact-person-icon"]} />
         <EditableText
+          clickedInput={clickedInput}
           type="name-text"
           isEditing={isEditing}
           value={contactData.name}

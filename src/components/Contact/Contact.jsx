@@ -22,6 +22,7 @@ export default function Contact({ contactData: initialContactData }) {
     handleTextClick,
     buildButtonText,
     buildModalAction,
+    clickedInput
   } = useContact(initialContactData);
 
   // ============================== CARD BUTTON CLICK
@@ -59,6 +60,7 @@ export default function Contact({ contactData: initialContactData }) {
           contactData={contactData}
           editData={editData}
           handleTextClick={handleTextClick}
+          clickedInput={clickedInput}
         />
         <ContactButton
           className={css["delete-button"]}
@@ -76,3 +78,4 @@ export default function Contact({ contactData: initialContactData }) {
     </>
   );
 }
+
