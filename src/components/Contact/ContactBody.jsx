@@ -1,45 +1,40 @@
 import { CiUser, CiPhone } from "react-icons/ci";
+import EditableText from "./EditableText";
 import css from "./Contact.module.css";
 
-const ContactBody = ({ isEditing, contactData, editData, handleTextClick }) => {
+const ContactBody = ({
+  isEditing,
+  contactData,
+  editData,
+  handleTextClick,
+}) => {
+
   return (
     <div className={css["contact-info-wrapper"]}>
-      <div className={css["item-icon-box"]}>
+      <div className={css["editable-input"]}>
         <CiUser className={css["contact-person-icon"]} />
-        {isEditing ? (
-          <input
-            className={css["contact-input"]}
-            type="text"
-            value={contactData.name}
-            onChange={editData}
-            name="name"
-            autoFocus
-          />
-        ) : (
-          <p className={css["name-text"]} onClick={handleTextClick}>
-            {contactData.name}
-          </p>
-        )}
+        <EditableText
+          type="name-text"
+          isEditing={isEditing}
+          value={contactData.name}
+          handleChange={editData}
+          name="name"
+          handleClick={handleTextClick}
+        />
       </div>
-      <div className={css["item-icon-box"]}>
+      <div className={css["editable-input"]}>
         <CiPhone className={css["contact-phone-icon"]} />
-        {isEditing ? (
-          <input
-            className={css["contact-input"]}
-            type="number"
-            name="number"
-            value={contactData.number}
-            onChange={editData}
-            autoFocus
-          />
-        ) : (
-          <p className={css["number-text"]} onClick={handleTextClick}>
-            {contactData.number}
-          </p>
-        )}
+        <EditableText
+          type="number-text"
+          isEditing={isEditing}
+          value={contactData.number}
+          handleChange={editData}
+          name="number"
+          handleClick={handleTextClick}
+        />
       </div>
     </div>
   );
-}
+};
 
 export default ContactBody;
