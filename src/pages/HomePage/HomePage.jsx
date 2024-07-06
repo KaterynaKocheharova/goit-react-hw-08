@@ -1,6 +1,6 @@
-import Text from "../../components/common/Text/Text";
-import Container from "../../components/common/Container/Container";
 import Section from "../../components/common/Section/Section";
+import Container from "../../components/common/Container/Container";
+import Text from "../../components/common/Text/Text";
 import { Wave } from "react-animated-text";
 
 const HomePage = () => {

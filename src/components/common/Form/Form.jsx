@@ -1,9 +1,9 @@
 import { Formik, Form } from "formik";
 import { useId } from "react";
-import getValidationSchema from "../../../js/validation-schemas";
-import getInitialValues from "../../../js/form-init-values";
+import  getValidationSchema  from "../../../js/validation-schemas";
+import  getInitialValues  from "../../../js/form-init-values";
 import { buildFormClassName } from "./FormHelpers";
-import { FormGroup } from "./FormGroup";
+import FormGroup from "./FormGroup";
 
 const BaseForm = ({ children, onSubmit, type }) => {
   const emailId = useId();

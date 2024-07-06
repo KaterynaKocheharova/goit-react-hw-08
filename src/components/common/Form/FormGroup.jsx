@@ -1,7 +1,7 @@
 import {Field, ErrorMessage } from "formik";
 import css from "./Form.module.css";
 
-export const FormGroup = ({ id, label, name, type }) => (
+const FormGroup = ({ id, label, name, type }) => (
     <div className={css["form-group"]}>
       <label className={css.label} htmlFor={id}>
         {label}
@@ -14,3 +14,5 @@ export const FormGroup = ({ id, label, name, type }) => (
       />
     </div>
   );
+
+  export default FormGroup;

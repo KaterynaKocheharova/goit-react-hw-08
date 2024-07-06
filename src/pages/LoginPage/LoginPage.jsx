@@ -1,6 +1,6 @@
-import LoginForm from "../../components/LoginForm/LoginForm";
-import Container from "../../components/common/Container/Container";
 import Section from "../../components/common/Section/Section";
+import Container from "../../components/common/Container/Container";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
 const LoginPage = () => {
   return (

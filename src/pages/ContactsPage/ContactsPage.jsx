@@ -1,16 +1,16 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Container from "../../components/common/Container/Container";
 import Section from "../../components/common/Section/Section";
+import Container from "../../components/common/Container/Container";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import ContactList from "../../components/ContactList/ContactList";
-import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
-import css from "./ContactsPage.module.css";
-import { useEffect } from "react";
-import { fetchContacts } from "../../redux/contacts/operations";
-import { Wave } from "react-animated-text";
 import Error from "../../components/common/Error/Error";
 import Loader from "../../components/common/Loader/Loader";
+import { Wave } from "react-animated-text";
+import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
+import { fetchContacts } from "../../redux/contacts/operations";
+import css from "./ContactsPage.module.css";
 
 const ContactsPage = () => {
   const error = useSelector(selectError);
@@ -27,9 +27,7 @@ const ContactsPage = () => {
         <h1 className={css["main-title"]}>
           <Wave
             text={`Manage your contacts here - add, update or delete them!`}
-            // effect="fadeOut"
             effect="color"
-            // effectChange={2.0}
             effectChange="var(--extra-color)"
             speed={15}
           />

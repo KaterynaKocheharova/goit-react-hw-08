@@ -51,8 +51,6 @@ export const useContact = (initialContactData) => {
     return cardState === "initial-state" ? "Delete" : "Update";
   };
 
-
-
   const buildModalAction = () => {
     switch (cardState) {
       case "editing-state":

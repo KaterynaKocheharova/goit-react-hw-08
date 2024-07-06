@@ -1,6 +1,6 @@
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import RestrictedRoute from "./RestrictedRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -16,7 +16,6 @@ const RegistrationPage = lazy(() =>
 );
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 export default function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -62,7 +61,7 @@ export default function App() {
                   />
                 }
               />
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Layout>
         </Suspense>

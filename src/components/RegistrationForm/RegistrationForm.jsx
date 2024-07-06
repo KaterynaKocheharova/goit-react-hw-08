@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../redux/auth/operations";
-import { activateErrorToast } from "../../js/toast";
-import { selectIsLoading } from "../../redux/auth/selectors";
 import BaseForm from "../common/Form/Form";
 import Loader from "../common/Loader/Loader";
 import Button from "../common/Button/Button";
+import { register } from "../../redux/auth/operations";
+import { activateErrorToast } from "../../js/toast";
+import { selectIsLoading } from "../../redux/auth/selectors";
+
 
 const RegistrationForm = () => {
   const isLoading = useSelector(selectIsLoading);

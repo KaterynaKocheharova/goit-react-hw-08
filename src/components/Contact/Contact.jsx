@@ -1,11 +1,12 @@
 import CustomModal from "../Modal/Modal";
+import ContactBody from "./ContactBody";
+import ContactButton from "./ContactButton";
 import css from "./Contact.module.css";
 import { UseModal } from "../../hooks/UseModal";
 import { useContact } from "../../hooks/useContact";
 import { addContactValidationSchema } from "../../js/validation-schemas";
 import { activateErrorToastWithCustomMessage } from "../../js/toast";
-import ContactBody from "./ContactBody";
-import ContactButton from "./ContactButton";
+
 
 export default function Contact({ contactData: initialContactData }) {
   // =========================== USE MODAL HOOK
