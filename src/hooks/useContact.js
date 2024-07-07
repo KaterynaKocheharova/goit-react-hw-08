@@ -6,7 +6,7 @@ import { activateSuccessToast, activateErrorToast } from "../js/toast";
 export const useContact = (initialContactData) => {
   const [contactData, setContactData] = useState(initialContactData);
   const [cardState, setCardState] = useState("initial-state");
-  const [clickedInput, setClickedInput] = useState("");
+  const [clickedInputId, setClickedInputId] = useState(null);
   const dispatch = useDispatch();
 
   // ========================= EDITING DATA
@@ -17,22 +17,21 @@ export const useContact = (initialContactData) => {
     }));
   };
 
-    // ============================= HANDLE TEXT CLICK
-
-    const handleTextClick = (e) => {
-      const inputType = e.target.getAttribute("data-type");
-      setClickedInput(inputType);
-      setCardState("editing-state");
-    };
+  // ============================= HANDLE TEXT CLICK
+  const handleTextClick = (e) => {
+    const id = e.target.getAttribute("data-id");
+    setClickedInputId(id);
+    setCardState("editing-state");
+  };
 
   // ============================================ ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
-    
     dispatch(updateContact(contactData))
       .unwrap()
       .then(() => {
         activateSuccessToast("Contact successfully updated");
         setCardState("initial-state");
+        setClickedInputId(null);
       })
       .catch((error) => activateErrorToast(error));
   };
@@ -46,7 +45,6 @@ export const useContact = (initialContactData) => {
   }
 
   // ========================================== EXTRACTED FUNCTIONS
-
   const buildButtonText = () => {
     return cardState === "initial-state" ? "Delete" : "Update";
   };
@@ -70,6 +68,6 @@ export const useContact = (initialContactData) => {
     handleTextClick,
     buildButtonText,
     buildModalAction,
-    clickedInput
+    clickedInputId
   };
 };

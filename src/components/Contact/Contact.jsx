@@ -7,14 +7,11 @@ import { useContact } from "../../hooks/useContact";
 import { addContactValidationSchema } from "../../js/validation-schemas";
 import { activateErrorToastWithCustomMessage } from "../../js/toast";
 
-
 export default function Contact({ contactData: initialContactData }) {
   // =========================== USE MODAL HOOK
-
   const { modalIsOpen, openModal, closeModal } = UseModal();
 
   // =========================== USE CONTACT HOOK
-
   const {
     contactData,
     cardState,
@@ -23,11 +20,10 @@ export default function Contact({ contactData: initialContactData }) {
     handleTextClick,
     buildButtonText,
     buildModalAction,
-    clickedInput
+    clickedInputId
   } = useContact(initialContactData);
 
   // ============================== CARD BUTTON CLICK
-
   const handleCardButtonClick = () => {
     if (cardState !== "editing-state") {
       setCardState("deleting-state");
@@ -50,7 +46,6 @@ export default function Contact({ contactData: initialContactData }) {
   };
 
   // =================================== RENDERING
-
   const isEditing = cardState === "editing-state";
 
   return (
@@ -61,14 +56,13 @@ export default function Contact({ contactData: initialContactData }) {
           contactData={contactData}
           editData={editData}
           handleTextClick={handleTextClick}
-          clickedInput={clickedInput}
+          clickedInputId={clickedInputId}
         />
         <ContactButton
           className={css["delete-button"]}
           handleClick={handleCardButtonClick}
           buttonText={buildButtonText()}
-        >
-        </ContactButton>
+        />
       </li>
       <CustomModal
         closeModal={closeModal}
@@ -79,4 +73,3 @@ export default function Contact({ contactData: initialContactData }) {
     </>
   );
 }
-
