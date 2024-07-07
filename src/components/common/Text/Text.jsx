@@ -1,7 +1,7 @@
 import { buildTextClassName } from "./TextHelpers.js";
 
 const Text = ({ children, isCentered, accented }) => {
-  return <p className={buildTextClassName(isCentered, accented)}>{children}</p>;
+  return <div className={buildTextClassName(isCentered, accented)}>{children}</div>;
 };
 
 export default Text;
