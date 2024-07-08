@@ -1,0 +1,20 @@
+.error-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+@media screen and (min-width: 700px) {
+    .error-box {
+        margin-bottom: 5rem;
+    }
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}

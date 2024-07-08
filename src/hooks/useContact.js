@@ -31,7 +31,7 @@ export const useContact = (initialContactData) => {
       .then(() => {
         activateSuccessToast("Contact successfully updated");
         setCardState("initial-state");
-        setClickedInputIds(null);
+        setClickedInputIds([]);
       })
       .catch((error) => activateErrorToast(error));
   };
