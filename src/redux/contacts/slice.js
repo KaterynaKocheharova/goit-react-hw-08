@@ -7,11 +7,11 @@ import {
 } from "./operations";
 
 export const handlePending = (state) => {
-  state.isLoading = true;
+  state.loading = true;
 };
 
 export const handleError = (state, action) => {
-  state.isLoading = false;
+  state.loading = false;
   state.error = action.payload;
 };
 
@@ -36,7 +36,9 @@ const contactsSlice = createSlice({
       .addCase(addContact.pending, handlePending)
       .addCase(addContact.fulfilled, (state, action) => {    
         state.items.push(action.payload);
+        state.loading = false;
       })
+      .addCase(addContact.rejected, handleError)
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
