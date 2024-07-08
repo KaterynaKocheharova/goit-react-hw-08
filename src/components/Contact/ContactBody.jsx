@@ -7,14 +7,14 @@ const ContactBody = ({
   contactData,
   editData,
   handleTextClick,
-  clickedInputId,
+  clickedInputIds,
 }) => {
   return (
     <div className={css["contact-info-wrapper"]}>
       <div className={css["editable-input"]}>
         <CiUser className={css["contact-person-icon"]} />
         <EditableText
-          clickedInputId={clickedInputId}
+          clickedInputIds={clickedInputIds}
           type="name-text"
           isEditing={isEditing}
           value={contactData.name}
@@ -27,7 +27,7 @@ const ContactBody = ({
       <div className={css["editable-input"]}>
         <CiPhone className={css["contact-phone-icon"]} />
         <EditableText
-          clickedInputId={clickedInputId}
+          clickedInputIds={clickedInputIds}
           type="number-text"
           isEditing={isEditing}
           value={contactData.number}

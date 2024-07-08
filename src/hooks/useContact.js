@@ -6,7 +6,7 @@ import { activateSuccessToast, activateErrorToast } from "../js/toast";
 export const useContact = (initialContactData) => {
   const [contactData, setContactData] = useState(initialContactData);
   const [cardState, setCardState] = useState("initial-state");
-  const [clickedInputId, setClickedInputId] = useState(null);
+  const [clickedInputIds, setClickedInputIds] = useState([]);
   const dispatch = useDispatch();
 
   // ========================= EDITING DATA
@@ -20,7 +20,7 @@ export const useContact = (initialContactData) => {
   // ============================= HANDLE TEXT CLICK
   const handleTextClick = (e) => {
     const id = e.target.getAttribute("data-id");
-    setClickedInputId(id);
+    setClickedInputIds(prev => [...prev, id]);
     setCardState("editing-state");
   };
 
@@ -31,7 +31,7 @@ export const useContact = (initialContactData) => {
       .then(() => {
         activateSuccessToast("Contact successfully updated");
         setCardState("initial-state");
-        setClickedInputId(null);
+        setClickedInputIds(null);
       })
       .catch((error) => activateErrorToast(error));
   };
@@ -68,6 +68,6 @@ export const useContact = (initialContactData) => {
     handleTextClick,
     buildButtonText,
     buildModalAction,
-    clickedInputId
+    clickedInputIds
   };
 };

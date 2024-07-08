@@ -7,27 +7,27 @@ const EditableText = ({
   handleChange,
   name,
   handleClick,
-  clickedInputId,
+  clickedInputIds,
   id,
 }) => {
   const numberInputRef = useRef(null);
   const nameInputRef = useRef(null);
 
   useEffect(() => {
-    if (isEditing && clickedInputId === id) {
+    if (isEditing && clickedInputIds.includes(id)) {
       if (name === "number" && numberInputRef.current) {
         numberInputRef.current.focus();
       } else if (name === "name" && nameInputRef.current) {
         nameInputRef.current.focus();
       }
     }
-  }, [isEditing, name, clickedInputId, id]);
+  }, [isEditing, name, clickedInputIds, id]);
 
-  return isEditing && clickedInputId === id ? (
+  return isEditing && clickedInputIds.includes(id) ? (
     <input
       ref={name === "number" ? numberInputRef : nameInputRef}
       className={css["contact-input"]}
-      type={name === "number" ? "number" : "text"}
+      type={name === "number" ? "tel" : "text"}
       value={value}
       onChange={handleChange}
       name={name}
