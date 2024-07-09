@@ -10,7 +10,7 @@ const authInitialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
-  isLoading: false,
+  loading: false,
   error: null,
 };
 
@@ -24,7 +24,7 @@ const auth = createSlice({
         state.isLoggedIn = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.isLoading = false;
+        state.loading = false;
         state.error = null;
       })
       .addCase(register.rejected, handleError)
@@ -33,7 +33,7 @@ const auth = createSlice({
         state.isLoggedIn = true;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.isLoading = false;
+        state.loading = false;
         state.error = null;
       })
       .addCase(login.rejected, handleError)
@@ -42,24 +42,24 @@ const auth = createSlice({
         state.isLoggedIn = false;
         state.user = { name: null, email: null };
         state.token = null;
-        state.isLoading = false;
+        state.loading = false;
         state.error = null;
       })
       .addCase(logOut.rejected, handleError)
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
-        state.isLoading = true;
+        state.loading = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.user = action.payload;
         state.isRefreshing = false;
-        state.isLoading = false;
+        state.loading = false;
         state.error = null;
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
-        state.isLoading = false;
+        state.loading = false;
         state.error = action.payload;
       });
   },

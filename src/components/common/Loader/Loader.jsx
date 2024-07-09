@@ -6,7 +6,7 @@ const Loader = ({ children }) => {
   return (
     <div className={css.backdrop}>
       <div className={css["loader-group"]}>
-        <Text isLoaderText>{children}</Text>
+        <Text isLoaderText isCentered>{children}</Text>
         <Circles  color="rgb(140, 153, 221)" />
       </div>
     </div>
