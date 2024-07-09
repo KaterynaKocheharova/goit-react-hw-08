@@ -36,7 +36,7 @@ const ContactsPage = () => {
           <ContactForm />
           <SearchBox />
         </div>
-        {isLoading && <Loader>Please, wait...</Loader>}
+        {isLoading && <Loader>Refreshing contacts. Please, wait...</Loader>}
         {error && (
           <Error>
             Ooops. Something went wrong. Check out the internet connection or
