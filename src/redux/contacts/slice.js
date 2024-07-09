@@ -6,18 +6,18 @@ import {
   updateContact,
 } from "./operations";
 
-export const handlePending = (state) => {
-  state.loading = true;
-};
+// export const handlePending = (state) => {
+//   state.loading = true;
+// };
 
-export const handleError = (state, action) => {
-  state.loading = false;
-  state.error = action.payload;
-};
+// export const handleError = (state, action) => {
+//   state.loading = null;
+//   state.error = action.payload;
+// };
 
 const contactsInitialState = {
   items: [],
-  loading: false,
+  loading: null,
   error: null,
 };
 

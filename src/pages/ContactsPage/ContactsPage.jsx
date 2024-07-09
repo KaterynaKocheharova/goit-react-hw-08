@@ -11,6 +11,7 @@ import { Wave } from "react-animated-text";
 import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
 import { fetchContacts } from "../../redux/contacts/operations";
 import css from "./ContactsPage.module.css";
+import { buildLoaderMessage } from "./contactsPageHelpers";
 
 const ContactsPage = () => {
   const error = useSelector(selectError);
@@ -36,7 +37,7 @@ const ContactsPage = () => {
           <ContactForm />
           <SearchBox />
         </div>
-        {isLoading && <Loader>Refreshing contacts. Please, wait...</Loader>}
+        {isLoading && <Loader>{buildLoaderMessage(isLoading)}</Loader>}
         {error && (
           <Error>
             Ooops. Something went wrong. Check out the internet connection or
