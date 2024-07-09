@@ -1,12 +1,16 @@
 import Section from "../Section/Section";
 import Container from "../Container/Container";
 import Text from "../Text/Text";
+import { Circles } from "react-loader-spinner";
 
 const Loader = ({ children }) => {
   return (
     <Section>
       <Container>
-        <Text isCentered>{children}</Text>
+        <div>
+          <Text isCentered>{children}</Text>
+          <Circles />
+        </div>
       </Container>
     </Section>
   );
