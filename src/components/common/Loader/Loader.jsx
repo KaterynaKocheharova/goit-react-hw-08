@@ -1,18 +1,15 @@
-import Section from "../Section/Section";
-import Container from "../Container/Container";
 import Text from "../Text/Text";
 import { Circles } from "react-loader-spinner";
+import css from "./Loader.module.css";
 
 const Loader = ({ children }) => {
   return (
-    <Section>
-      <Container>
-        <div>
-          <Text isCentered>{children}</Text>
-          <Circles />
-        </div>
-      </Container>
-    </Section>
+    <div className={css.backdrop}>
+      <div className={css["loader-group"]}>
+        <Text isLoaderText>{children}</Text>
+        <Circles  color="rgb(140, 153, 221)" />
+      </div>
+    </div>
   );
 };
 
