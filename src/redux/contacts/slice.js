@@ -6,14 +6,10 @@ import {
   updateContact,
 } from "./operations";
 
-// export const handlePending = (state) => {
-//   state.loading = true;
-// };
-
-// export const handleError = (state, action) => {
-//   state.loading = null;
-//   state.error = action.payload;
-// };
+export const handleError = (state, action) => {
+  state.loading = null;
+  state.error = action.payload;
+};
 
 const contactsInitialState = {
   items: [],
@@ -26,20 +22,26 @@ const contactsSlice = createSlice({
   initialState: contactsInitialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchContacts.pending, handlePending)
+      .addCase(fetchContacts.pending, (state) => {
+        state.loading = "fetching-contacts";
+      })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
         state.items = action.payload;
       })
       .addCase(fetchContacts.rejected, handleError)
-      .addCase(addContact.pending, handlePending)
-      .addCase(addContact.fulfilled, (state, action) => {    
+      .addCase(addContact.pending, (state) => {
+        state.loading = "adding-contact";
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
         state.loading = false;
       })
       .addCase(addContact.rejected, handleError)
-      .addCase(deleteContact.pending, handlePending)
+      .addCase(deleteContact.pending, (state) => {
+        state.laoding = "deleting-contact";
+      })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
@@ -49,7 +51,9 @@ const contactsSlice = createSlice({
         state.items.splice(index, 1);
       })
       .addCase(deleteContact.rejected, handleError)
-      .addCase(updateContact.pending, handlePending)
+      .addCase(updateContact.pending, (state) => {
+        state.loading = "updating-contact";
+      })
       .addCase(updateContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;

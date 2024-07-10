@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/auth/operations";
 import { activateErrorToast } from "../../js/toast";
-import { selectIsLoading } from "../../redux/auth/selectors";
+import { selectIsAuthLoading } from "../../redux/auth/selectors";
 import BaseForm from "../common/Form/Form";
 import Loader from "../common/Loader/Loader";
 import Button from "../common/Button/Button";
 
 const LoginForm = () => {
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsAuthLoading);
+  const isLoginingInProgress = isLoading === "logining";
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
@@ -23,7 +24,7 @@ const LoginForm = () => {
       <BaseForm onSubmit={onSubmit} type="login-form">
         <Button type="auth">Log in</Button>
       </BaseForm>
-      {isLoading && <Loader>Sending your data. Please, wait.</Loader>}
+      {isLoginingInProgress && <Loader>Logining in progress. Please, wait.</Loader>}
     </div>
   );
 };

@@ -4,11 +4,11 @@ import Loader from "../common/Loader/Loader";
 import Button from "../common/Button/Button";
 import { register } from "../../redux/auth/operations";
 import { activateErrorToast } from "../../js/toast";
-import { selectIsLoading } from "../../redux/auth/selectors";
-
+import { selectIsAuthLoading } from "../../redux/auth/selectors";
 
 const RegistrationForm = () => {
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsAuthLoading);
+  const isRegisteringInProgress = isLoading === "registering";
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
@@ -24,7 +24,9 @@ const RegistrationForm = () => {
       <BaseForm onSubmit={onSubmit} type="registration-form">
         <Button type="auth">Register</Button>
       </BaseForm>
-      {isLoading && <Loader>Sending your data. Please, wait.</Loader>}
+      {isRegisteringInProgress && (
+        <Loader>Registering you. Please, wait</Loader>
+      )}
     </div>
   );
 };
