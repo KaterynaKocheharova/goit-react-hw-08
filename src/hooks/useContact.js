@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { updateContact, deleteContact } from "../redux/contacts/operations";
 import { activateSuccessToast, activateErrorToast } from "../js/toast";
 
 export const useContact = (initialContactData) => {
   const [contactData, setContactData] = useState(initialContactData);
-  const [cardState, setCardState] = useState("initial-state");
+  const [cardState, setCardState] = useState("initial-state"); // initial-state, editing-state, deleting-state, discarding-state
   const [clickedInputIds, setClickedInputIds] = useState([]);
   const dispatch = useDispatch();
+
+  const initialData = useRef(initialContactData);
 
   // ========================= EDITING DATA
   const editData = (e) => {
@@ -23,6 +25,14 @@ export const useContact = (initialContactData) => {
     setClickedInputIds(prev => [...prev, id]);
     setCardState("editing-state");
   };
+
+  // ============================ HANDLE DISCARDING CHANGES BUTTON CLICK
+
+    const handleDiscradingChangesClick = () => {
+      setClickedInputIds([]);
+      setContactData(initialData.current); 
+      setCardState("initial-state");
+    };
 
   // ============================================ ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
@@ -66,6 +76,7 @@ export const useContact = (initialContactData) => {
     setCardState,
     editData,
     handleTextClick,
+    handleDiscradingChangesClick,
     buildButtonText,
     buildModalAction,
     clickedInputIds

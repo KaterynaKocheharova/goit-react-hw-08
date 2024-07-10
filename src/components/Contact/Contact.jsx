@@ -18,6 +18,7 @@ export default function Contact({ contactData: initialContactData }) {
     setCardState,
     editData,
     handleTextClick,
+    handleDiscradingChangesClick,
     buildButtonText,
     buildModalAction,
     clickedInputIds
@@ -63,6 +64,7 @@ export default function Contact({ contactData: initialContactData }) {
           handleClick={handleCardButtonClick}
           buttonText={buildButtonText()}
         />
+        {cardState === "editing-state" && <ContactButton handleClick={handleDiscradingChangesClick} buttonText="Discard"/>}
       </li>
       <CustomModal
         closeModal={closeModal}
