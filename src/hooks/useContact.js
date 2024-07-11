@@ -22,17 +22,9 @@ export const useContact = (initialContactData) => {
   // ============================= HANDLE TEXT CLICK
   const handleTextClick = (e) => {
     const id = e.target.getAttribute("data-id");
-    setClickedInputIds(prev => [...prev, id]);
+    setClickedInputIds((prev) => [...prev, id]);
     setCardState("editing-state");
   };
-
-  // ============================ HANDLE DISCARDING CHANGES BUTTON CLICK
-
-    const handleDiscradingChangesClick = () => {
-      setClickedInputIds([]);
-      setContactData(initialData.current); 
-      setCardState("initial-state");
-    };
 
   // ============================================ ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
@@ -54,6 +46,12 @@ export const useContact = (initialContactData) => {
       });
   }
 
+  function doDiscardChanges() {
+    setClickedInputIds([]);
+    setContactData(initialData.current);
+    setCardState("initial-state");
+  }
+
   // ========================================== EXTRACTED FUNCTIONS
   const buildButtonText = () => {
     return cardState === "initial-state" ? "Delete" : "Update";
@@ -65,6 +63,8 @@ export const useContact = (initialContactData) => {
         return doUpdateContact;
       case "deleting-state":
         return doDeleteContact;
+      case "discarding-state":
+        return doDiscardChanges;
       default:
         return null;
     }
@@ -76,9 +76,8 @@ export const useContact = (initialContactData) => {
     setCardState,
     editData,
     handleTextClick,
-    handleDiscradingChangesClick,
     buildButtonText,
     buildModalAction,
-    clickedInputIds
+    clickedInputIds,
   };
 };
