@@ -45,8 +45,6 @@ export default function Contact({ contactData: initialContactData }) {
     }
   };
 
-
-  
     // ============================ HANDLE DISCARDING CHANGES BUTTON CLICK
 
     const handleDiscradingChangesClick = () => {
@@ -55,6 +53,7 @@ export default function Contact({ contactData: initialContactData }) {
     };
 
   // =================================== RENDERING
+  
   const isEditing = cardState === "editing-state";
 
   return (
