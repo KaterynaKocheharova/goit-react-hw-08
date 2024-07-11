@@ -5,12 +5,13 @@ import { buildModalButtonText, buildModalText } from "./ModalHelpers";
 
 Modal.setAppElement("#App");
 
-const CustomModal = ({ closeModal, modalIsOpen, cardState, doSomething, setCardState }) => {
+const CustomModal = ({ closeModal, modalIsOpen, cardState, doSomething, setCardState, shouldCloseOnOverlayClick = true}) => {
   return (
     <Modal
       className={css.modal}
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
+      shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
     >
       <>
         <div>{buildModalText(cardState)}</div>
@@ -26,7 +27,7 @@ const CustomModal = ({ closeModal, modalIsOpen, cardState, doSomething, setCardS
         {cardState === "discarding-state" && <Button onClick={() => {
           closeModal();
           setCardState("editing-state");
-        }}>Go back to updates</Button>}
+        }} type="modal-window">Go back to updates</Button>}
       </>
     </Modal>
   );

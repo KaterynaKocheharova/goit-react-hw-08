@@ -45,15 +45,15 @@ export default function Contact({ contactData: initialContactData }) {
     }
   };
 
-    // ============================ HANDLE DISCARDING CHANGES BUTTON CLICK
+  // ============================ HANDLE DISCARDING CHANGES BUTTON CLICK
 
-    const handleDiscradingChangesClick = () => {
-      setCardState("discarding-state");
-      openModal();
-    };
+  const handleDiscradingChangesClick = () => {
+    setCardState("discarding-state");
+    openModal();
+  };
 
   // =================================== RENDERING
-  
+
   const isEditing = cardState === "editing-state";
 
   return (
@@ -84,6 +84,7 @@ export default function Contact({ contactData: initialContactData }) {
         cardState={cardState}
         doSomething={buildModalAction()}
         setCardState={setCardState}
+        shouldCloseOnOverlayClick={cardState === "discarding-state" ? false : true}
       />
     </>
   );
