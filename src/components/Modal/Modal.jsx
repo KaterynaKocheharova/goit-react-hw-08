@@ -5,7 +5,7 @@ import { buildModalButtonText, buildModalText } from "./ModalHelpers";
 
 Modal.setAppElement("#App");
 
-const CustomModal = ({ closeModal, modalIsOpen, cardState, doSomething }) => {
+const CustomModal = ({ closeModal, modalIsOpen, cardState, doSomething, setCardState }) => {
   return (
     <Modal
       className={css.modal}
@@ -23,6 +23,10 @@ const CustomModal = ({ closeModal, modalIsOpen, cardState, doSomething }) => {
         >
           {buildModalButtonText(cardState)}
         </Button>
+        {cardState === "discarding-state" && <Button onClick={() => {
+          closeModal();
+          setCardState("editing-state");
+        }}>Go back to updates</Button>}
       </>
     </Modal>
   );

@@ -83,6 +83,7 @@ export default function Contact({ contactData: initialContactData }) {
         modalIsOpen={modalIsOpen}
         cardState={cardState}
         doSomething={buildModalAction()}
+        setCardState={setCardState}
       />
     </>
   );
