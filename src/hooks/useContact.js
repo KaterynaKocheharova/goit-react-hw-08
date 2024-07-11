@@ -1,7 +1,10 @@
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { updateContact, deleteContact } from "../redux/contacts/operations";
+import { UseModal } from "./UseModal";
 import { activateSuccessToast, activateErrorToast } from "../js/toast";
+import { addContactValidationSchema } from "../js/validation-schemas";
+import { activateErrorToastWithCustomMessage } from "../js/toast";
 
 export const useContact = (initialContactData) => {
   const [contactData, setContactData] = useState(initialContactData);
@@ -11,22 +14,55 @@ export const useContact = (initialContactData) => {
 
   const initialData = useRef(initialContactData);
 
-  // ========================= EDITING DATA
-  const editData = (e) => {
-    setContactData((data) => ({
-      ...data,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const initialState = cardState === "initial-state";
+  const editingState = cardState === "editing-state";
 
-  // ============================= HANDLE TEXT CLICK
+  const { modalIsOpen, openModal, closeModal } = UseModal();
+
+  // ============================= CARD TEXT CLICK - MAKING INPUT VISIBLE
   const handleTextClick = (e) => {
     const id = e.target.getAttribute("data-id");
     setClickedInputIds((prev) => [...prev, id]);
     setCardState("editing-state");
   };
 
-  // ============================= ACTIONS TO PASS TO THE MODAL
+    // =========================  INPUT CHANGE - EDITING DATA
+    const editData = (e) => {
+      setContactData((data) => ({
+        ...data,
+        [e.target.name]: e.target.value,
+      }));
+    };
+
+   // ============================== CARD BUTTON CLICK - VALIDATION - TRIGGER MODAL
+   const handleCardButtonClick = () => {
+    if (initialState) {
+      setCardState("deleting-state");
+      openModal();
+      return;
+    }
+
+    if (editingState) {
+      addContactValidationSchema
+        .validate(contactData)
+        .then(() => {
+          openModal();
+        })
+        .catch(() => {
+          activateErrorToastWithCustomMessage(
+            "Make sure your contact has between 3 and 50 characters and number has minimum 8 characters"
+          );
+        });
+    }
+  };
+
+  // ============================ DISCARDING CHANGES BUTTON CLICK - TRIGGER MODAL
+  const handleDiscradingChangesClick = () => {
+    setCardState("discarding-state");
+    openModal();
+  };
+
+  // ============================= ACTIONS TO PASS TO THE MODAL THAT WILL CAUSE SOME CARD CHANGES
   const doUpdateContact = () => {
     dispatch(updateContact(contactData))
       .unwrap()
@@ -52,11 +88,15 @@ export const useContact = (initialContactData) => {
     setCardState("initial-state");
   }
 
-  // ========================================== EXTRACTED FUNCTIONS
+  // !!!!! ========================================== EXTRACTED FUNCTIONS
+
+  // CONTACT HELPER FUNCTION
   const buildButtonText = () => {
-    return cardState === "initial-state" ? "Delete" : "Update";
+    return initialState ? "Delete" : "Update";
   };
 
+
+  // MODAL HELPER FUNCTION
   const buildModalAction = () => {
     switch (cardState) {
       case "editing-state":
@@ -79,5 +119,9 @@ export const useContact = (initialContactData) => {
     buildButtonText,
     buildModalAction,
     clickedInputIds,
+    handleCardButtonClick,
+    handleDiscradingChangesClick,
+    closeModal,
+    modalIsOpen, 
   };
 };
