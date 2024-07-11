@@ -26,7 +26,7 @@ export const useContact = (initialContactData) => {
     setCardState("editing-state");
   };
 
-  // ============================================ ACTIONS TO PASS TO THE MODAL
+  // ============================= ACTIONS TO PASS TO THE MODAL
   const doUpdateContact = () => {
     dispatch(updateContact(contactData))
       .unwrap()
