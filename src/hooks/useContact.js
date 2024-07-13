@@ -60,6 +60,11 @@ export const useContact = (initialContactData) => {
   const handleDiscradingChangesClick = () => {
     setCardState("discarding-state");
     openModal();
+  };  
+
+// =============================== MAIN BUTTON TEXT
+  const buildButtonText = () => {
+    return initialState ? "Delete" : "Update";
   };
 
   // ============================= ACTIONS TO PASS TO THE MODAL THAT WILL CAUSE SOME CARD CHANGES
@@ -88,15 +93,7 @@ export const useContact = (initialContactData) => {
     setCardState("initial-state");
   }
 
-  // !!!!! ========================================== EXTRACTED FUNCTIONS
-
-  // CONTACT HELPER FUNCTION
-  const buildButtonText = () => {
-    return initialState ? "Delete" : "Update";
-  };
-
-
-  // MODAL HELPER FUNCTION
+  //  =================================== BUILD MODAL ACTION
   const buildModalAction = () => {
     switch (cardState) {
       case "editing-state":

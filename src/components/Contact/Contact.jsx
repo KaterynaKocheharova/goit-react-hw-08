@@ -5,7 +5,6 @@ import css from "./Contact.module.css";
 import { useContact } from "../../hooks/useContact";
 
 export default function Contact({ contactData: initialContactData }) {
-
   const {
     contactData,
     cardState,
@@ -17,7 +16,8 @@ export default function Contact({ contactData: initialContactData }) {
     clickedInputIds,
     handleCardButtonClick,
     handleDiscradingChangesClick,
-    closeModal, modalIsOpen
+    closeModal,
+    modalIsOpen,
   } = useContact(initialContactData);
 
   const isEditing = cardState === "editing-state";
@@ -50,7 +50,9 @@ export default function Contact({ contactData: initialContactData }) {
         cardState={cardState}
         doSomething={buildModalAction()}
         setCardState={setCardState}
-        shouldCloseOnOverlayClick={cardState === "discarding-state" ? false : true}
+        shouldCloseOnOverlayClick={
+          cardState === "discarding-state" ? false : true
+        }
       />
     </>
   );
