@@ -5,13 +5,6 @@ import { buildFormClassName } from "./FormHelpers";
 import FormGroup from "./FormGroup";
 
 const BaseForm = ({ children, onSubmit, type }) => {
-
-  // const numberId = useId();
-
-  // const isAddContactForm = type === "add-contact-form";
-  // const isRegistrationForm = type === "registration-form";
-  // const isLoginForm = type === "login-form";
-
   return (
     <Formik
       initialValues={getInitialValues(type)}

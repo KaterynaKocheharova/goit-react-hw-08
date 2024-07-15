@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useId } from "react";
 import BaseForm from "../common/Form/Form";
 import Button from "../common/Button/Button";
 import { addContact } from "../../redux/contacts/operations";
@@ -11,6 +12,8 @@ import {
 } from "./ContactFormHelpers";
 
 export default function ContactForm() {
+  const nameId = useId();
+  const numberId = useId();
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
@@ -36,6 +39,18 @@ export default function ContactForm() {
 
   return (
     <BaseForm onSubmit={handleSubmit} type="add-contact-form">
+          <BaseForm.FormGroup
+          id={nameId}
+          label="Name"
+          name="name"
+          type="text"
+        />
+        <BaseForm.FormGroup
+          id={numberId}
+          label="Number"
+          name="number"
+          type="tel"
+        />
       <Button>Add contact</Button>
     </BaseForm>
   );
