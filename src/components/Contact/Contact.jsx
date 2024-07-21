@@ -1,8 +1,9 @@
 import CustomModal from "../Modal/Modal";
-import ContactBody from "./ContactBody";
 import ContactButton from "./ContactButton";
+import EditableText from "./EditableText";
 import css from "./Contact.module.css";
 import { useContact } from "../../hooks/useContact";
+import { CiUser, CiPhone } from "react-icons/ci";
 
 export default function Contact({ contactData: initialContactData }) {
   const {
@@ -25,15 +26,35 @@ export default function Contact({ contactData: initialContactData }) {
   return (
     <>
       <li className={css["contact-item"]}>
-        <ContactBody
-          isEditing={isEditing}
-          contactData={contactData}
-          editData={editData}
-          handleTextClick={handleTextClick}
-          clickedInputIds={clickedInputIds}
-        />
+        <div className={css["contact-info-wrapper"]}>
+          <div className={css["editable-input"]}>
+            <CiUser className={css["contact-person-icon"]} />
+            <EditableText
+              clickedInputIds={clickedInputIds}
+              type="name-text"
+              isEditing={isEditing}
+              value={contactData.name}
+              handleChange={editData}
+              name="name"
+              handleClick={handleTextClick}
+              id="name"
+            />
+          </div>
+          <div className={css["editable-input"]}>
+            <CiPhone className={css["contact-phone-icon"]} />
+            <EditableText
+              clickedInputIds={clickedInputIds}
+              type="number-text"
+              isEditing={isEditing}
+              value={contactData.number}
+              handleChange={editData}
+              name="number"
+              handleClick={handleTextClick}
+              id="number"
+            />
+          </div>
+        </div>
         <ContactButton
-          className={css["delete-button"]}
           handleClick={handleCardButtonClick}
           buttonText={buildButtonText()}
         />
