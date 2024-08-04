@@ -1,80 +1,33 @@
-import CustomModal from "../Modal/Modal";
-import ContactButton from "./ContactButton";
-import EditableText from "./EditableText";
-import css from "./Contact.module.css";
-import { useContact } from "../../hooks/useContact";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaPencilAlt } from "react-icons/fa";
 import { CiUser, CiPhone } from "react-icons/ci";
+import css from "./Contact.module.css";
 
-export default function Contact({ contactData: initialContactData }) {
-  const {
-    contactData,
-    cardState,
-    setCardState,
-    editData,
-    handleTextClick,
-    buildButtonText,
-    buildModalAction,
-    clickedInputIds,
-    handleCardButtonClick,
-    handleDiscradingChangesClick,
-    closeModal,
-    modalIsOpen,
-  } = useContact(initialContactData);
-
-  const isEditing = cardState === "editing-state";
-
+export default function Contact({
+  contactData: { name, number },
+  handleDeleteClick,
+}) {
   return (
-    <>
-      <li className={css["contact-item"]}>
-        <div className={css["contact-info-wrapper"]}>
-          <div className={css["editable-input"]}>
-            <CiUser className={css["contact-person-icon"]} />
-            <EditableText
-              clickedInputIds={clickedInputIds}
-              type="name-text"
-              isEditing={isEditing}
-              value={contactData.name}
-              handleChange={editData}
-              name="name"
-              handleClick={handleTextClick}
-              id="name"
-            />
-          </div>
-          <div className={css["editable-input"]}>
-            <CiPhone className={css["contact-phone-icon"]} />
-            <EditableText
-              clickedInputIds={clickedInputIds}
-              type="number-text"
-              isEditing={isEditing}
-              value={contactData.number}
-              handleChange={editData}
-              name="number"
-              handleClick={handleTextClick}
-              id="number"
-            />
-          </div>
+    <li className={css["contact-item"]}>
+      <div className={css["contact-info-wrapper"]}>
+        <div className={css["contact-text-box"]}>
+          <CiUser className={css["contact-person-icon"]} />
+          <p className={css["name-text"]}>{name}</p>
         </div>
-        <ContactButton
-          handleClick={handleCardButtonClick}
-          buttonText={buildButtonText()}
-        />
-        {cardState === "editing-state" && (
-          <ContactButton
-            handleClick={handleDiscradingChangesClick}
-            buttonText="Discard"
-          />
-        )}
-      </li>
-      <CustomModal
-        closeModal={closeModal}
-        modalIsOpen={modalIsOpen}
-        cardState={cardState}
-        doSomething={buildModalAction()}
-        setCardState={setCardState}
-        shouldCloseOnOverlayClick={
-          cardState === "discarding-state" ? false : true
-        }
-      />
-    </>
+        <div className={css["contact-text-box"]}>
+          <CiPhone className={css["contact-phone-icon"]} />
+          <p className={css["number-text"]}>{number}</p>
+        </div>
+      </div>
+      <div className={css["button-box"]}>
+        <button className={css["contact-btn"]}>
+          <FaPencilAlt className={css["button-icon"]} />
+        </button>
+        <button className={css["contact-btn"]} onClick={handleDeleteClick}>
+          <MdDeleteOutline className={css["button-icon"]} />
+        </button>
+      </div>
+    </li>
   );
 }
+

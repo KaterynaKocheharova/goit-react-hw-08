@@ -4,13 +4,17 @@ import { selectFilteredContacts } from "../../redux/contacts/selectors";
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
 
-export default function ContactList() {
+export default function ContactList({ handleDeleteClick }) {
   const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
     <ul className={css["contact-list"]}>
       {filteredContacts.map((contact) => (
-        <Contact key={contact.id} contactData={contact} />
+        <Contact
+          key={contact.id}
+          contactData={contact}
+          handleDeleteClick={handleDeleteClick}
+        />
       ))}
     </ul>
   );

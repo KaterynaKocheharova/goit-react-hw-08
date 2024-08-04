@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Section from "../../components/common/Section/Section";
 import Container from "../../components/common/Container/Container";
@@ -12,6 +12,7 @@ import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
 import { fetchContacts } from "../../redux/contacts/operations";
 import css from "./ContactsPage.module.css";
 import { buildLoaderMessage } from "./contactsPageHelpers";
+import CustomModal from "../../components/common/Modal/Modal";
 
 const ContactsPage = () => {
   const error = useSelector(selectError);
@@ -22,31 +23,54 @@ const ContactsPage = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  const [modalType, setModalType] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const handleDeleteContactBtnClick = () => {
+    setModalType("delete");
+    openModal();
+  }
+
   return (
-    <Section>
-      <Container>
-        <h1 className={css["main-title"]}>
-          <Wave
-            text={`Manage your contacts here - add, update or delete them!`}
-            effect="color"
-            effectChange="var(--extra-color)"
-            speed={15}
-          />
-        </h1>
-        <div className={css["top-container"]}>
-          <ContactForm />
-          <SearchBox />
-        </div>
-        {isLoading && <Loader>{buildLoaderMessage(isLoading)}</Loader>}
-        {error && (
-          <Error>
-            Ooops. Something went wrong. Check out the internet connection or
-            try again later.
-          </Error>
-        )}
-        <ContactList />
-      </Container>
-    </Section>
+    <>
+      <Section>
+        <Container>
+          <h1 className={css["main-title"]}>
+            <Wave
+              text={`Manage your contacts here - add, update or delete them!`}
+              effect="color"
+              effectChange="var(--extra-color)"
+              speed={15}
+            />
+          </h1>
+          <div className={css["top-container"]}>
+            <ContactForm />
+            <SearchBox />
+          </div>
+          {isLoading && <Loader>{buildLoaderMessage(isLoading)}</Loader>}
+          {error && (
+            <Error>
+              Ooops. Something went wrong. Check out the internet connection or
+              try again later.
+            </Error>
+          )}
+          <ContactList handleDeleteClick={handleDeleteContactBtnClick} />
+        </Container>
+      </Section>
+      <CustomModal
+        type={modalType}
+        closeModal={closeModal}
+        modalIsOpen={modalIsOpen}
+      />
+    </>
   );
 };
 
