@@ -25,6 +25,8 @@ const ContactsPage = () => {
 
   const [modalType, setModalType] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentContactId, setCurrentContactId] = useState(null);
+  const [contactData, setContactData] = useState(null);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -34,10 +36,20 @@ const ContactsPage = () => {
     setModalIsOpen(true);
   };
 
+  const changeCurrentId = (id) => {
+    setCurrentContactId(id);
+  };
+
   const handleDeleteContactBtnClick = () => {
-    setModalType("delete");
+    setModalType("confirming deletion");
     openModal();
-  }
+  };
+
+  const handleUpdateContactClick = (contactData) => {
+    setContactData(contactData);
+    setModalType("update");
+    openModal();
+  };
 
   return (
     <>
@@ -62,13 +74,19 @@ const ContactsPage = () => {
               try again later.
             </Error>
           )}
-          <ContactList handleDeleteClick={handleDeleteContactBtnClick} />
+          <ContactList
+            handleDeleteClick={handleDeleteContactBtnClick}
+            handleUpdateContactClick={handleUpdateContactClick}
+            changeCurrentId={changeCurrentId}
+          />
         </Container>
       </Section>
       <CustomModal
         type={modalType}
         closeModal={closeModal}
         modalIsOpen={modalIsOpen}
+        currentContactId={currentContactId}
+        contactData={contactData}
       />
     </>
   );

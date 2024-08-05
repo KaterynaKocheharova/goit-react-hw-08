@@ -4,8 +4,10 @@ import { CiUser, CiPhone } from "react-icons/ci";
 import css from "./Contact.module.css";
 
 export default function Contact({
-  contactData: { name, number },
+  contactData: { id, name, number },
   handleDeleteClick,
+  handleUpdateContactClick,
+  changeCurrentId,
 }) {
   return (
     <li className={css["contact-item"]}>
@@ -21,13 +23,21 @@ export default function Contact({
       </div>
       <div className={css["button-box"]}>
         <button className={css["contact-btn"]}>
-          <FaPencilAlt className={css["button-icon"]} />
+          <FaPencilAlt
+            className={css["button-icon"]}
+            onClick={() => handleUpdateContactClick({ id, name, number })}
+          />
         </button>
-        <button className={css["contact-btn"]} onClick={handleDeleteClick}>
+        <button
+          className={css["contact-btn"]}
+          onClick={() => {
+            handleDeleteClick();
+            changeCurrentId(id);
+          }}
+        >
           <MdDeleteOutline className={css["button-icon"]} />
         </button>
       </div>
     </li>
   );
 }
-

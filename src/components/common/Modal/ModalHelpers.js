@@ -1,6 +1,8 @@
+
+
 export const buildModalText = (type) => {
   switch (type) {
-    case "delete":
+    case "confirming deletion":
       return "Are you sure you want to delete the contact? Click delete if so.";
     case "update":
       return "Are you sure you want to edit the contact? You won't be able to get the previous version.";
@@ -13,7 +15,7 @@ export const buildModalText = (type) => {
 
 export const buildModalButtonText = (type) => {
   switch (type) {
-    case "delete":
+    case "confirming deletion":
       return "delete";
     case "update":
       return "update";
@@ -23,3 +25,4 @@ export const buildModalButtonText = (type) => {
       return "yes, I confirm";
   }
 };
+
