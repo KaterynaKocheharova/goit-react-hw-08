@@ -21,10 +21,10 @@ const LoginForm = () => {
 
   return (
     <div>
-      <BaseForm onSubmit={onSubmit} type="login-form">
-        <Button type="auth">Log in</Button>
-      </BaseForm>
-      {isLoginingInProgress && <Loader>Logining in progress. Please, wait.</Loader>}
+      <BaseForm onSubmit={onSubmit} type="login-form" />
+      {isLoginingInProgress && (
+        <Loader>Logining in progress. Please, wait.</Loader>
+      )}
     </div>
   );
 };

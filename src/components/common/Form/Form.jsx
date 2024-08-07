@@ -1,11 +1,12 @@
 import { Formik, Form } from "formik";
 import { useId } from "react";
-import  getValidationSchema  from "../../../js/validation-schemas";
-import  getInitialValues  from "../../../js/form-init-values";
-import { buildFormClassName } from "./FormHelpers";
+import getValidationSchema from "../../../js/validation-schemas";
+import getInitialValues from "../../../js/form-init-values";
+import { buildFormClassName, buildButtonText } from "./FormHelpers";
+import Button from "../Button/Button";
 import FormGroup from "./FormGroup";
 
-const BaseForm = ({ children, onSubmit, type }) => {
+const BaseForm = ({ onSubmit, type }) => {
   const emailId = useId();
   const passwordId = useId();
   const nameId = useId();
@@ -14,6 +15,7 @@ const BaseForm = ({ children, onSubmit, type }) => {
   const isAddContactForm = type === "add-contact-form";
   const isRegistrationForm = type === "registration-form";
   const isLoginForm = type === "login-form";
+
 
   return (
     <Formik
@@ -44,8 +46,7 @@ const BaseForm = ({ children, onSubmit, type }) => {
         {isRegistrationForm && (
           <FormGroup id={nameId} label="Your name" name="name" type="text" />
         )}
-
-        {children}
+        <Button>{buildButtonText(type)}</Button>
       </Form>
     </Formik>
   );

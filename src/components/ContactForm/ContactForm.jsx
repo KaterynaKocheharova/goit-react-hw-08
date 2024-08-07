@@ -35,8 +35,6 @@ export default function ContactForm() {
   };
 
   return (
-    <BaseForm onSubmit={handleSubmit} type="add-contact-form">
-      <Button>Add contact</Button>
-    </BaseForm>
+    <BaseForm onSubmit={handleSubmit} type="add-contact-form"/>
   );
 }

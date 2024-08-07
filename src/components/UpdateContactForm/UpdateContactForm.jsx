@@ -1,12 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectIsLoading } from "../../redux/contacts/selectors";
+import {  useDispatch } from "react-redux";
 import { updateContact } from "../../redux/contacts/operations";
 import { activateErrorToast, activateSuccessToast } from "../../js/toast";
 import { addContactValidationSchema } from "../../js/validation-schemas";
-import BaseForm from "../common/Form/Form";
-import Button from "../common/Button/Button";
 
-const UpdateContactForm = () => {
+const UpdateContactForm = ({contactData}) => {
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
@@ -31,9 +28,8 @@ const UpdateContactForm = () => {
 
   return (
     <div>
-      <BaseForm onSubmit={onSubmit} type="update-contact-form">
-        <Button type="submit">Update Contact</Button>
-      </BaseForm>
+    {/* USE FORMIC HERE  */}
+   
     </div>
   );
 };

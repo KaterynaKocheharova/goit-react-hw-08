@@ -1,12 +1,18 @@
-import {Field, ErrorMessage } from "formik";
+import { Field, ErrorMessage } from "formik";
 import css from "./Form.module.css";
 
-const FormGroup = ({ id, label, name, type }) => (
+const FormGroup = ({ id, label, name, type}) => {
+  return (
     <div className={css["form-group"]}>
       <label className={css.label} htmlFor={id}>
         {label}
       </label>
-      <Field className={css["form-field"]} id={id} name={name} type={type} />
+      <Field
+        className={css["form-field"]}
+        id={id}
+        name={name}
+        type={type}
+      />
       <ErrorMessage
         className={css["error-message"]}
         name={name}
@@ -14,5 +20,6 @@ const FormGroup = ({ id, label, name, type }) => (
       />
     </div>
   );
+};
 
-  export default FormGroup;
+export default FormGroup;

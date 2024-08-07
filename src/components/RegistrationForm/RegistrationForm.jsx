@@ -21,9 +21,7 @@ const RegistrationForm = () => {
 
   return (
     <div>
-      <BaseForm onSubmit={onSubmit} type="registration-form">
-        <Button type="auth">Register</Button>
-      </BaseForm>
+      <BaseForm onSubmit={onSubmit} type="registration-form" />
       {isRegisteringInProgress && (
         <Loader>Registering you. Please, wait</Loader>
       )}

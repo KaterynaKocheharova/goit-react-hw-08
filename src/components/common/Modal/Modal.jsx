@@ -60,7 +60,7 @@ const CustomModal = ({
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
     >
-      {type !== "update" ? baseModalContent : <UpdateContactForm />}
+      {type !== "update" ? baseModalContent : <UpdateContactForm contactData={contactData} />}
     </Modal>
   );
 };

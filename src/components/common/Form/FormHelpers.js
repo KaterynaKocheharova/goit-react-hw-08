@@ -8,3 +8,16 @@ export const buildFormClassName = (type) => {
       css["center-form"]
   );
 };
+
+export const buildButtonText = (type) => {
+  switch (type) {
+    case "registration-form":
+      return "Register";
+    case "login-form":
+      return "Log in";
+    case "add-contact-form":
+      return "Add contact";
+    default:
+      return "Confirm";
+  }
+};
