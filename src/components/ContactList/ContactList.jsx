@@ -4,7 +4,7 @@ import { selectFilteredContacts } from "../../redux/contacts/selectors";
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
 
-export default function ContactList({ handleDeleteClick, changeCurrentId, handleUpdateContactClick }) {
+export default function ContactList() {
   const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
@@ -13,9 +13,6 @@ export default function ContactList({ handleDeleteClick, changeCurrentId, handle
         <Contact
           key={contact.id}
           contactData={contact}
-          handleDeleteClick={handleDeleteClick}
-          handleUpdateContactClick={handleUpdateContactClick}
-          changeCurrentId={changeCurrentId}
         />
       ))}
     </ul>
