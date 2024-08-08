@@ -1,16 +1,17 @@
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateContact } from "../../redux/contacts/operations";
 import { activateErrorToast, activateSuccessToast } from "../../js/toast";
 import { addContactValidationSchema } from "../../js/validation-schemas";
+import BaseForm from "../common/Form/Form";
 
-const UpdateContactForm = ({contactData}) => {
+const UpdateContactForm = ({ contactData }) => {
   const dispatch = useDispatch();
 
-  const onSubmit = (values) => {
+  const handleSubmit = (values) => {
     addContactValidationSchema
       .validate(values)
       .then(() => {
-        dispatch(updateContact(values))
+        dispatch(updateContact({ ...values, id: contactData.id }))
           .unwrap()
           .then(() => {
             activateSuccessToast("Contact successfully updated");
@@ -26,12 +27,7 @@ const UpdateContactForm = ({contactData}) => {
       });
   };
 
-  return (
-    <div>
-    {/* USE FORMIC HERE  */}
-   
-    </div>
-  );
+  return <BaseForm onSubmit={handleSubmit} type="update-contact-form" />;
 };
 
 export default UpdateContactForm;

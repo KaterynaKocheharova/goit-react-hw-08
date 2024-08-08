@@ -13,9 +13,9 @@ const BaseForm = ({ onSubmit, type }) => {
   const numberId = useId();
 
   const isAddContactForm = type === "add-contact-form";
+  const isUpdateContactForm = type === "update-contact-form";
   const isRegistrationForm = type === "registration-form";
   const isLoginForm = type === "login-form";
-
 
   return (
     <Formik
@@ -25,6 +25,13 @@ const BaseForm = ({ onSubmit, type }) => {
     >
       <Form className={buildFormClassName(type)}>
         {isAddContactForm && (
+          <>
+            <FormGroup id={nameId} label="Name" name="name" type="text" />
+            <FormGroup id={numberId} label="Number" name="number" type="text" />
+          </>
+        )}
+
+        {isUpdateContactForm && (
           <>
             <FormGroup id={nameId} label="Name" name="name" type="text" />
             <FormGroup id={numberId} label="Number" name="number" type="text" />
@@ -46,6 +53,7 @@ const BaseForm = ({ onSubmit, type }) => {
         {isRegistrationForm && (
           <FormGroup id={nameId} label="Your name" name="name" type="text" />
         )}
+
         <Button>{buildButtonText(type)}</Button>
       </Form>
     </Formik>
